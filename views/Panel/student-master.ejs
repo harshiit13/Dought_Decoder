@@ -1,0 +1,145 @@
+<%- include('../Partial/head.ejs') %>
+<%- include('../Partial/header.ejs') %>
+
+
+        <div class="body-wrapper">
+          <div class="container-fluid" style="padding-top: 150px !important;">
+
+
+
+              <div class="card card-body" style="padding-top: 20px !important;">
+          
+            
+                <div class="px-4 py-3 border-bottom">
+                    <h5 class="card-title fw-semibold mb-0">Add Student</h5>
+                  </div>
+
+
+
+<form action="/Student/setStudent" method="post"  enctype="multipart/form-data" >
+
+
+
+
+    <div class="form-row">
+
+      <div class="form-group col-md-3">
+        <label for="inputState">Department</label>
+        <select required name="DepartmentID" id="inputState" class="form-control">
+          <option selected>--Select--</option>
+          <% for (d1 of data){ %>
+          <option value="<%= d1.DepartmentID %>"><%= d1.DepartmentName %></option>
+          <% } %>
+        </select>
+      </div>
+
+
+        <div class="form-group col-md-3">
+          <label for="inputState">Course</label>
+          <select required name="CourseID" id="inputState" class="form-control">
+            <option selected>--Select--</option>
+            <% for (c of course){ %>
+            <option value="<%= c.CourseID %>"><%= c.CourseName %></option>
+            <% } %>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputZip">Mobile Number</label>
+          <input required name="Mobile" placeholder="Mobile Number" type="text" class="form-control" id="inputZip">
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="inputCity">Name</label>
+          <input required placeholder="Name" name="Name" type="text" class="form-control" id="inputCity">
+        </div>
+
+          
+      </div>
+
+
+    <div class="row mt-s">
+        
+
+
+      <div class="form-group col-md-3">
+        <label for="inputZip">BirthDate</label>
+        <input required name="BirthDate" type="date" class="form-control" id="inputZip">
+      </div>
+
+          
+
+          <div class="form-group col-md-3">
+            <label for="Name">Enrollment Number</label>
+            <input type="text" required   class="form-control" name="EnrollmentNo" id="name" placeholder="EnrollmentNo">
+          </div>
+          
+
+          <div class="form-group col-md-3">
+            <label for="Name">UserName</label>
+            <input required type="text"    class="form-control" name="UserName" id="name" placeholder="UserName">
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="Name">Passwod</label>
+            <input required type="password"  class="form-control" name="Password" id="StudentPhoto" placeholder="Enter Passworrd">
+          </div>
+
+
+        
+
+    </div>
+
+
+    <div class="row">
+                
+
+      <div class="form-group col-md-4">
+        <label for="Name">Studednt Photo</label>
+        <input type="file"  class="form-control" name="StudentPhoto" id="StudentPhoto" placeholder="Select Photo">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="Name">Semeste</label>
+        <input required type="number"  class="form-control" name="Semester" id="StudentPhoto" placeholder="Enter Semester">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="Name">EmailID</label>
+        <input type="email"  class="form-control" name="EmailID" id="StudentPhoto" placeholder="Enter EmailID">
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <button type="submit" class="btn waves-effect waves-light btn-secondary">
+          Save
+        </button>
+
+        <button type="button" onclick="cancle()" class= "ms-3 btn mb-1 waves-effect waves-light btn-rounded btn-danger">
+          Cancle
+        </button>
+      </div>
+    </div>
+
+
+</form>
+
+
+</div>
+
+<script>
+  function cancle(){
+    window.location.href = "/addStudent"
+  }
+</script>
+
+
+
+
+
+</div>
+</div>
+<%- include('../Partial/footer.ejs') %>

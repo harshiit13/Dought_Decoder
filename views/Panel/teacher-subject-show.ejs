@@ -1,0 +1,55 @@
+<%- include('../Partial/head.ejs') %>
+    <%- include('../Partial/header.ejs') %>
+        <div class="body-wrapper">
+            <div class="container-fluid">
+
+
+                                
+                <div class="table-responsive rounded-2 mb-4">
+                    <table class="table border text-nowrap customize-table mb-0 align-middle">
+                      <thead class="text-dark fs-4">
+                        <tr>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Course Name</h6></th>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Subject Name</h6></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+
+                        <% for( user of data) { %>
+
+                        <tr>
+
+                           
+                          <td><p class="mb-0 fw-normal"><%= user.CourseName %></p>
+                        </td>
+                          <td>
+                            <p class="mb-0 fw-normal"><%= user.SubjectName %></p>
+                          </td>
+                          <td>
+                            <form action="/removeTeacherSubjectDetail/<%= user.TeacherSubjectDetailID %>" method="">
+                                <button type="submit" class="btn justify-content-end btn-danger rounded-pill px-4">
+                                  <div class="d-flex align-items-center">
+                                    Delete
+                                  </div>
+                                </button>
+                              </form>
+                          </td>
+
+                        
+                      <% } %>
+
+
+
+
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                
+</div>
+</div>
+<%- include('../Partial/footer.ejs') %>

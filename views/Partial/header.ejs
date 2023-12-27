@@ -1,0 +1,433 @@
+<body>
+
+
+    <!-- Preloader -->
+    <div class="preloader">
+      <!-- <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/favicon.ico" alt="loader" class="lds-ripple img-fluid" />
+      
+      -->
+
+      <img width="180" src="../../dist/images/backgrounds/123.png" alt="">
+    </div>
+    <!-- Body Wrapper -->
+    <div class="page-wrapper" id="main-wrapper" data-layout="horizontal" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+      <!-- Header Start -->
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-lg-none">
+              <a class="nav-link sidebartoggler ms-n3" id="sidebarCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item d-none d-lg-block">
+              <a href="/" class="text-nowrap nav-link">
+                <img width="180" src="../../dist/images/backgrounds/123.png" alt="">
+                <!-- <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/dark-logo.svg" class="dark-logo" width="180" alt="" />
+                  
+                <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/light-logo.svg" class="light-logo"  width="180" alt="" /> -->
+             <img src="/dist/images/logo/Screenshot (267).png" class="light-logo" width="180" alt="Not available">
+             
+              </a>
+            </li>
+
+
+
+          </ul>
+
+
+          
+
+
+
+          <div class="d-block d-lg-none">
+            <a href="index.html" class="text-nowrap nav-link">
+              <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/dark-logo.svg" width="180" alt="" />
+            </a>
+          </div>
+          <button class="navbar-toggler p-2 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="p-2">
+              <i class="ti ti-dots fs-7"></i>
+            </span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+
+            <ul class="navbar-nav">
+              <li class="nav-item d-block nav-link">
+                  <h6 class="h6"><%= name %></h6>
+              </li>
+              <li class="nav-item">
+                <a class="btn mb-1 btn-primary" href="/logout" role="button">LogOut</a>
+              </li>
+            </ul>
+
+          </div>
+        </nav>
+      </header>
+      <!-- Header End -->
+      <!-- Sidebar Start -->
+      <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div>
+          <!-- Sidebar navigation-->
+          <nav class="sidebar-nav scroll-sidebar">
+            <ul id="sidebarnav">
+              <!-- ============================= -->
+              <!-- Home -->
+              <!-- ============================= -->
+              <li class="nav-small-cap">
+                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                <span class="hide-menu">Dashboard</span>
+              </li>
+
+
+
+
+              <% if(type == "Admin"){ %>
+              <li class="sidebar-item">
+                <a class="sidebar-link " href="/" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-home-2"></i>
+                  </span>
+                  <span class="hide-menu">Dashboard</span>
+                </a>
+                </li>
+
+
+              <!-- =================== -->
+              <!-- Dashboard -->
+              <!-- =================== -->
+
+        
+              <!-- ----------======Teacher Deatils------======== -->
+              <li class="sidebar-item">
+                <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-home-2"></i>
+                  </span>
+                  <span class="hide-menu">Teacher Details</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                  <li class="sidebar-item">
+                    <a href="/addTeacher" class="sidebar-link">
+                      <i class="ti ti-home-2"></i>
+                      <span class="hide-menu">Add Teacher</span>
+                    </a>
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="/Teacher" class="sidebar-link">
+                      <i class="ti ti-layout-sidebar"></i>
+                      <span class="hide-menu">View Teachers</span>
+                    </a>
+                  </li>
+                  
+                </ul>
+              </li>
+
+
+
+
+
+<!-- ------======Student Details=-------========= -->
+              <li class="sidebar-item">
+                <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-home-2"></i>
+                  </span>
+                  <span class="hide-menu">Student Details</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                  <li class="sidebar-item">
+                    <a href="/addStudent" class="sidebar-link">
+                      <i class="ti ti-home-2"></i>
+                      <span class="hide-menu">Add Student</span>
+                    </a>
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="/Student/getAllStudent" class="sidebar-link">
+                      <i class="ti ti-layout-sidebar"></i>
+                      <span class="hide-menu">View Students</span>
+                    </a>
+                  </li>
+                  
+                </ul>
+              </li>
+
+<!-- 
+
+----------==========All Requests========--------- -->
+              <li class="sidebar-item">
+                <a class="sidebar-link " href="/bookingrequest" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-home-2"></i>
+                  </span>
+                  <span class="hide-menu">Booking Requests</span>
+                </a>
+                </li>
+
+
+
+<!-- ------------========Profile=======----------- -->
+                <li class="sidebar-item">
+                  <a class="sidebar-link " href="/Profile" aria-expanded="false">
+                    <span>
+                      <i class="ti ti-home-2"></i>
+                    </span>
+                    <span class="hide-menu">Profile</span>
+                  </a>
+                  </li>
+
+
+
+                  <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
+                      <span>
+                        <i class="ti ti-home-2"></i>
+                      </span>
+                      <span class="hide-menu">Master</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                      <li class="sidebar-item">
+                        <a href="/addDepartment" class="sidebar-link">
+                          <i class="ti ti-home-2"></i>
+                          <span class="hide-menu">Add Department</span>
+                        </a>
+                      </li>
+                      <li class="sidebar-item">
+                        <a href="/allDepatment" class="sidebar-link">
+                          <i class="ti ti-layout-sidebar"></i>
+                          <span class="hide-menu">View Departments</span>
+                        </a>
+                      </li>
+
+                      <li class="sidebar-item">
+                        <a href="/addTeacher" class="sidebar-link">
+                          <i class="ti ti-home-2"></i>
+                          <span class="hide-menu">Add Course</span>
+                        </a>
+                      </li>
+                      <li class="sidebar-item">
+                        <a href="/Teacher" class="sidebar-link">
+                          <i class="ti ti-layout-sidebar"></i>
+                          <span class="hide-menu">View Courses</span>
+                        </a>
+                      </li>
+
+
+                      <li class="sidebar-item">
+                        <a href="/addsubject" class="sidebar-link">
+                          <i class="ti ti-home-2"></i>
+                          <span class="hide-menu">Add Subjects</span>
+                        </a>
+                      </li>
+                      <li class="sidebar-item">
+                        <a href="/Teacher" class="sidebar-link">
+                          <i class="ti ti-layout-sidebar"></i>
+                          <span class="hide-menu">View Subjects</span>
+                        </a>
+                      </li>
+                      
+                    </ul>
+                  </li>
+
+
+<% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <!-- ============================= -->
+              <!-- Teacher -->
+              <!-- ============================= -->
+
+
+           <%   if(type == "Teacher"){ %>
+
+
+
+<!-- ==============-------------view request -------============== -->
+
+<li class="sidebar-item">
+  <a class="sidebar-link" href="/bookingrequest" aria-expanded="false">
+    <span>
+      <i class="ti ti-notebook"></i>
+    </span>
+    <span class="hide-menu">View Request</span>
+  </a>
+  </li>
+
+
+
+           
+
+
+
+<!-- Subject Deatils ========================= -->
+           <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu">Subject Details</span>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+              <span>
+                <i class="ti ti-notebook"></i>
+              </span>
+              <span class="hide-menu">Subject Details</span>
+            </a>
+            <ul aria-expanded="false" class="collapse first-level">
+              <li class="sidebar-item">
+                <a href="/addTeacherSubjectDetail" class="sidebar-link">
+                  <i class="ti ti-help"></i>
+                  <span class="hide-menu">Add Subject</span>
+                </a>
+              </li>
+  
+              <li class="sidebar-item">
+                <a href="/showTeacherSubjectDetail" class="sidebar-link">
+                  <i class="ti ti-user-circle"></i>
+                  <span class="hide-menu">View Subjects</span>
+                </a>
+                </li>
+            </ul>
+          </li>
+
+
+          <!-- Time Slot      Deatils ========================= -->
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu">Time Slot Details</span>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+              <span>
+                <i class="ti ti-notebook"></i>
+              </span>
+              <span class="hide-menu">Time Slot Details</span>
+            </a>
+            <ul aria-expanded="false" class="collapse first-level">
+              <li class="sidebar-item">
+                <a href="/addTeacherTimeSlotDetail" class="sidebar-link">
+                  <i class="ti ti-help"></i>
+                  <span class="hide-menu">Add Time Slot</span>
+                </a>
+              </li>
+  
+              <li class="sidebar-item">
+                <a href="/showTeacherTimeSlotDetail" class="sidebar-link">
+                  <i class="ti ti-user-circle"></i>
+                  <span class="hide-menu">View Time Slot</span>
+                </a>
+                </li>
+            </ul>
+          </li>
+
+
+          <% } %>
+
+
+
+
+<!-- =--------------------------=--=----------=-----=====================--------------=-=-- -->
+
+
+
+
+
+
+
+
+
+
+               
+
+
+                  
+            
+              <!-- ============================= -->
+              <!-- Student -->
+         <%   if(type == "Student"){ %>
+           
+
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="/bookslot" aria-expanded="false">
+                    <span>
+                      <i class="ti ti-notebook"></i>
+                    </span>
+                    <span class="hide-menu">Book Slot</span>
+                  </a>
+                  </li>
+
+                  <li class="sidebar-item">
+                    <a class="sidebar-link" href="/bookstatus" aria-expanded="false">
+                      <span>
+                        <i class="ti ti-notebook"></i>
+                      </span>
+                      <span class="hide-menu">View Booked Slot</span>
+                    </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                      <a class="sidebar-link" href="/Profile" aria-expanded="false">
+                        <span>
+                          <i class="ti ti-notebook"></i>
+                        </span>
+                        <span class="hide-menu">Profile</span>
+                      </a>
+                      </li>
+
+
+<% } %>
+
+
+
+
+
+
+  
+
+
+            
+
+                
+                </ul>
+              </li>
+
+              <!-- =================== -->
+
+              <!-- ============================= -->
+
+              
+
+
+              <!-- ============================= -->
+
+
+              <!-- =================== -->
+            
+
+
+            </ul>
+
+
+
+          
+
+          </nav>
+          <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+      </aside>
+      <!-- Sidebar End -->

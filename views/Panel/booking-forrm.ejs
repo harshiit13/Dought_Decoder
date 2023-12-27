@@ -1,0 +1,196 @@
+<%- include('../Partial/head.ejs') %>
+    <%- include('../Partial/header.ejs') %>
+
+
+        <div class="body-wrapper">
+            <div class="container-fluid" style="padding-top: 150px !important;">
+
+
+                <div class="card card-body" style="padding-top: 20px !important;">
+
+                    <div class="px-2 py-2 border-bottom">
+                        <h5 class="card-title fw-semibold mb-0">Book Slot</h5>
+                    </div>
+
+
+
+
+                    <form action="/BookingSlot/setBookingSlot" method="post">
+
+               
+
+                       <input type="hidden" name="DepartmentID" value="<%= sdata[0].DepartmentID %>">
+                       <input type="hidden" name="Status" value="Pending">
+                     
+
+
+                        <div class="row mt-5">
+
+                            <div class="form-group col-md-4">
+
+
+                                <label for="TeacheID">Select Teacher : </label>
+                                <select id="TeacherID" class="form-control" name="TeacherID" onchange="BindTimeSlot()" >
+                                    <option>--Select Teacher--</option>
+                                    <% for (teacher of tdata){ %>
+                                     
+                                
+                                        <option value="<%= teacher.TeacherID %>">
+                                            <%= teacher.Name %>
+                                        </option>
+
+                                        <% } %>
+                                      
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group col-md-4">
+
+
+                                <label for="SlotID">Select Time Slot:</label>
+
+                                <select name="TeacherTimeSlotDetailID" class="form-control" id="SlotID"  onchange="BindSubject()">
+   
+
+                                </select>
+
+
+
+                            </div>
+
+
+
+                            <div class="form-group col-md-4">
+
+
+                                <label for="SubjectID">Select Subject : </label>
+                                <select id="SubjectID" class="form-control" name="SubjectID" >
+
+
+                                </select>
+
+                            </div>
+
+                     
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="Name">Title</label>
+                                <input required type="text" class="form-control" name="Title" placeholder="Enter Title">
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label for="Name">Description</label>
+                                <textarea required type="" class="form-control" name="Description"
+                                    placeholder="Enter Description"></textarea>
+                            </div>
+
+
+                        </div>
+
+
+
+
+                        <div class="row mt-3">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn waves-effect waves-light btn-secondary">
+                                    Save
+                                </button>
+
+                                <button type="button"
+                                    class="ms-3 btn mb-1 waves-effect waves-light btn-rounded btn-danger">
+                                    Cancle
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+
+        <script>
+
+            function BindTimeSlot() {
+                let TeacherID = $("#TeacherID").val();
+                if (TeacherID != "") {
+                    $.ajax({
+                        async: false,
+                        url: '/BindTeacherTimeSlot/' + TeacherID,
+                        success: function (res) {
+                            if (res.data.length > 0) {
+                                $("#SlotID").empty();
+                                $("#SlotID").append($("<option></option>").val("").html('---Select Slot---'));
+                                $.each(res.data, function (data, value) {
+                                    $("#SlotID").append($("<option></option>").val(value.TeacherTimeSlotDetailID).html(value.TimeSlot));
+                                });
+                            } else {
+                                $("#SlotID").empty();
+                                $("#SlotID").append($("<option></option>").val("").html('---Select Slot Name---'));
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            $("#SlotID").empty();
+                            $("#SlotID").append($("<option></option>").val("").html('---Select Slot Name---'));
+                            alert(error);
+                        }
+                    })
+                }
+            }
+
+
+            function BindSubject(){
+
+                let TeacherID = $("#TeacherID").val();
+                if (TeacherID != "") {
+                    $.ajax({
+                        async: false,
+                        url: '/BindSubject/' + TeacherID,
+                        success: function (res) {
+
+                            if (res.data.length > 0) {
+                                $("#SubjectID").empty();
+                                $("#SubjectID").append($("<option></option>").val("").html('---Select Slot---'));
+                                $.each(res.data, function (data, value) {
+                                    
+                                    $("#SubjectID").append($("<option></option>").val(value.SubjectID).html(value.SubjectName));
+                                });
+                            } else {
+                                $("#SubjectID").empty();
+                                $("#SubjectID").append($("<option></option>").val("").html('---Select Slot Name---'));
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            $("#SubjectID").empty();
+                            $("#SubjectID").append($("<option></option>").val("").html('---Select Slot Name---'));
+                            alert(error);
+                        }
+                    })
+                }
+
+            }
+         
+
+
+        </script>
+
+        
+
+
+
+        <%- include('../Partial/footer.ejs') %>

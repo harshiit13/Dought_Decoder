@@ -1,0 +1,188 @@
+<%- include('../Partial/head.ejs') %>
+    <%- include('../Partial/header.ejs') %>
+        <div class="body-wrapper" style="padding-right: 0px;">
+            <div class="container-fluid"  style="padding-top: 150px !important;" >
+
+
+
+
+              <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="exampleModalLabel1">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header d-flex align-items-center">
+                      <h4 class="modal-title" id="exampleModalLabel1">
+                        Enter Pin
+                      </h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <label for="recipient-name" class="control-label">PIN:</label>
+                        <input type="text" class="form-control" id="PinNo" >
+                      </div>
+                      <span id="spanPassword" style="display: none;">Passwod is:
+                        <label id="userPassword" for="message-text" class="control-label"></label></span>
+      
+                        <span id="wrongpass" class="text-danger" style="display: none;">Please Enter Correct Passwod
+                          </span>
+      
+                          <span id="emptypass" class="text-danger" style="display: none;">Please Enter Pin
+                           </span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success" onclick="chkPassword()">
+                        Show Password
+                      </button>
+                      <button type="button" class="btn btn-light-danger text-danger font-medium" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+                
+
+                
+                <div class="table-responsive rounded-2 mb-4">
+                    <table class="table border text-nowrap customize-table mb-0 align-middle">
+                      <thead class="text-dark fs-4">
+                        <tr>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Student Name</h6></th>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Department Name</h6></th>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Email</h6></th>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Course</h6></th>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Mobile</h6></th>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Semester</h6></th>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Birthdate</h6></th>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Username</h6></th>
+                          <th><h6 class="fs-4 fw-semibold mb-0">Password</h6></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+
+                        <% for(user of data) { %>
+
+                        <tr>
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <img src="../../uploads/Student/<%= user.StudentPhoto %>" class="rounded-circle" width="40" height="40">
+                              <div class="ms-3">
+                                <h4 class="fs-4 fw-semibold mb-0"><%= user.Name %></h4>
+                                <p class="mb-0 fs-4"><%= user.EnrollmentNo %></p>
+                              </div>
+                            </div>
+                          </td>
+                          <td><p class="mb-0 fw-normal"><%= user.DepartmentName %></p></td>
+                          <td>
+                            <p class="mb-0 fw-normal"><%= user.EmailID %></p>
+                          </td>
+                          <td>
+                            <p class="mb-0 fw-normal"><%= user.CourseName %></p>
+                          </td>
+                          <td>
+                            <p class="mb-0 fw-normal"><%= user.Mobile %></p>
+                          </td>
+                          <td>
+                            <p class="mb-0 fw-normal"><%= user.Semester %></p>
+                          </td>
+                          <td>
+                            <p class="mb-0 fw-normal"><%= user.BirthDate %></p>
+                          </td>
+                          <td>
+                            <p class="mb-0 fw-normal"><%= user.UserName %></p>
+                          </td>
+                          <td>
+                           
+                      <button type="button" class="btn btn-primary"
+                      onclick="openPasswordModel('<%= user.Password %>')">
+                      <i class="fa fa-eye"></i>
+                    </button>
+
+                          </td>
+
+ 
+                        <% if(type == "Admin"){ %>
+                          <td>
+
+                            <form action="/viewStudent" method="post">
+                              <input type="hidden" name="StudentID" value="<%= user.StudentID %>">
+                        <button type="submit" class="btn justify-content-end btn-primary rounded-pill px-4">
+                          <div class="d-flex align-items-center">
+                            Edit
+                          </div>
+                        </button>
+                      </form>
+                      </td>
+                      <td>
+        
+                        <form action="/removeStudent/<%= user.StudentID %>" method="">
+                        <button type="submit" class="btn justify-content-end btn-danger rounded-pill px-4">
+                          <div class="d-flex align-items-center">
+                            Delete
+                          </div>
+                        </button>
+                      </form>
+                      </td>
+                      <% } %>                         
+
+                
+                        
+                      <% } %>
+
+
+
+
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+ 
+
+
+            </div>
+        </div>
+
+
+
+        <script>
+
+function edit() {
+        window.location.href = "/viewTeacher"
+      }
+
+      function openPasswordModel(pwd) {
+        $("#passwordModal").modal('show');
+        $("#userPassword")[0].innerHTML = pwd;
+
+        $("#spanPassword").css('display', 'none');
+        $("#wrongpass").css('display', 'none');
+        $("#emptypass").css('display', 'none');
+        $("#PinNo").val('') 
+
+
+      }
+
+      function chkPassword() {
+        if ($("#PinNo").val() != "") {
+          if ($("#PinNo").val() == "1234") {
+            $("#spanPassword").css('display', 'inline-block');
+          } else {
+            $("#spanPassword").css('display', 'none');
+            
+            $("#wrongpass").css('display','inline-block')
+          }
+        } else {
+           $("#emptypass").css('display','inline-block')
+        }
+      }
+
+
+
+        </script>
+        <%- include('../Partial/footer.ejs') %>

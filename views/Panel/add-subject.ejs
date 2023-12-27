@@ -1,0 +1,89 @@
+<%- include('../Partial/head.ejs') %>
+<%- include('../Partial/header.ejs') %>
+
+
+<div class="body-wrapper">
+  <div class="container-fluid" style="padding-top: 150px !important;">
+
+
+
+    <div class="card card-body" style="padding-top: 20px !important;">
+
+      <form action="/Subject/setSubject" method="post">
+        <div class="row">
+      
+        <div class="form-group col-md-4">
+            <label for="inputState">Department<span class="text-danger ml-1">*</span></label>
+            <select onchange="BindSubject()" required name="DepartmentID" id="DepartmentID" class="form-control">
+              <option selected value=" <%= data[0].DepartmentID %> "><%= data[0].DepartmentName %></option>
+              <% for (d of data){ %>
+                <option value="<%= d.DepartmentID %>">
+                  <%= d.DepartmentName %>
+                </option>
+                <% } %>
+            </select>
+            <span id="de" class="text-danger ml-1"></span>
+          </div>
+
+
+          <div class="form-group col-md-4">
+            <label for="inputState">Course<span class="text-danger ml-1">*</span></label>
+            <select required name="CourseID" id="CourseID" class="form-control">
+             
+            </select>
+            <span id="de" class="text-danger ml-1"></span>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="inputState">Subject Name<span class="text-danger ml-1">*</span></label>
+            <input class="form-control" type="text" name="SubjectName" id="SubjectName" placeholder="Subject Name">
+          </div>
+
+        </div>
+
+        <button class="btn btn-info mt-3">Submit</button>
+      </form>
+
+
+    </div>
+
+
+  </div>
+</div>
+
+
+<script>
+    function BindSubject(){
+
+let DepartmentID = $("#DepartmentID").val();
+if (DepartmentID != "") {
+    $.ajax({
+        async: false,
+        url: '/BindCourse/' + DepartmentID,
+        success: function (res) {
+
+            if (res.data.length > 0) {
+                $("#CourseID").empty();
+                $("#CourseID").append($("<option></option>").val("").html('---Select Slot---'));
+                $.each(res.data, function (data, value) {
+                    
+                    $("#CourseID").append($("<option></option>").val(value.CourseID).html(value.CourseName));
+                });
+            } else {
+                $("#CourseID").empty();
+                $("#CourseID").append($("<option></option>").val("").html('---Select Slot Name---'));
+            }
+        },
+        error: function (xhr, status, error) {
+            $("#CourseID").empty();
+            $("#CourseID").append($("<option></option>").val("").html('---Select Slot Name---'));
+            alert(error);
+        }
+    })
+}
+
+}
+</script>
+
+
+<%- include('../Partial/footer.ejs') %>

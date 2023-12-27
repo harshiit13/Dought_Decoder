@@ -1,0 +1,28 @@
+<%- include('../Partial/head.ejs') %>
+<%- include('../Partial/header.ejs') %>
+
+
+<div class="body-wrapper">
+  <div class="container-fluid" style="padding-top: 150px !important;">
+
+
+
+    <div class="card card-body" style="padding-top: 20px !important;">
+
+      <form action="/Department/setDepartment" method="post">
+        <label for="">Enter Department Name</label>
+        <input class="form-control" type="text" name="DepartmentName" placeholder="Department Name" > 
+
+        <button class="btn btn-info mt-3">Submit</button>
+      </form>
+
+
+    </div>
+
+
+  </div>
+</div>
+
+
+
+<%- include('../Partial/footer.ejs') %>

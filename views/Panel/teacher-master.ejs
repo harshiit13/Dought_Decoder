@@ -1,0 +1,196 @@
+<%- include('../Partial/head.ejs') %>
+  <%- include('../Partial/header.ejs') %>
+    <div class="body-wrapper">
+      <div class="container-fluid" style="padding-top: 150px !important;">
+        
+        <div class="card card-body" style="padding-top: 20px !important;">
+
+
+          <div class="px-4 py-3 border-bottom">
+            <h5 class="card-title fw-semibold mb-0">Add Teacher</h5>
+          </div>
+          <form class="form mt-3" method="post" action="/Teacher/setTeacher" enctype="multipart/form-data">
+            <!-- <input class="form-control" name="UserName" value="<%= name %>" type="text" placeholder="Readonly input here…" readonly="">
+                        <input class="form-control" name="TeacherID" value="<%= id %>" type="text" placeholder="Readonly input here…" readonly="">
+                         -->
+            <div class="row">
+
+                <input type="hidden" name="TeacherID" value=""class="form-control">
+                <input type="hidden" name="AdminID" value="<%= id %>"class="form-control">
+
+              <div class="form-group col-md-3">
+                <label for="inputState">Department<span class="text-danger ml-1">*</span></label>
+                <select name="DepartmentID" id="inputState" class="form-control">
+                  <option selected>--Select--</option>
+                  <% for (d of data){ %>
+                    <option value="<%= d.DepartmentID %>">
+                      <%= d.DepartmentName %>
+                    </option>
+                    <% } %>
+                </select>
+                <span id="de" class="text-danger ml-1"></span>
+              </div>
+
+
+              <div class="form-group col-md-3">
+                <label for="Name">Name<span class="text-danger ml-1">*</span></label>
+                <input required type="text" class="form-control" name="Name" id="name" placeholder="Enter Name">
+                <span id="ne" class="text-danger ml-1"></span>
+              </div>
+
+
+
+              <div class="form-group col-md-3">
+                <label for="inputEmail4">Mobile Number<span class="text-danger ml-1">*</span></label>
+                <input required name="Mobile" type="number" class="form-control" id="inputEmail4" placeholder="10-Digits">
+                <span id="me" class="text-danger ml-1"></span>
+              </div>
+
+
+
+              <div class="form-group col-md-3">
+                <label for="inputEmail4">UserName<span class="text-danger ml-1">*</span></label>
+                <input required name="UserName" type="text" class="form-control" id="inputEmail4" placeholder="Enter UserName">
+                <span id="ue" class="text-danger ml-1"></span>
+              </div>
+
+
+
+
+
+            </div>
+
+
+            <div class="row mt-5">
+
+              <div class="form-group col-md-3">
+                <label for="inputEmail4">Password<span class="text-danger ml-1">*</span></label>
+                <input required name="Password" type="password" class="form-control" id="inputEmail4" placeholder="Enter Password">
+                <span id="pe" class="text-danger ml-1"></span>
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputEmail4">Email</label>
+                <input required name="EmailID" type="email" class="form-control" id="inputEmail4" placeholder="Enter Email">
+                <span id="ee" class="text-danger ml-1"></span>
+              </div>
+
+
+              <div class="form-group col-md-3">
+                <label for="inputEmail4">Photo</label>
+                <input required name="TeacherPhoto" type="file" class="form-control" id="inputEmail4" placeholder="Select Photo">
+              </div>
+
+
+
+              <div class="form-group col-md-3">
+                <label for="inputEmail4">Addrress</label>
+                <input required name="Address" type="text" class="form-control" id="inputEmail4" placeholder="Enter Address">
+              </div>
+
+
+
+
+
+
+            </div>
+
+
+            <div class="row">
+
+              <div class="col-md-3"></div>
+              <div class="col-md-3"></div>
+              <div class="col-md-3"></div>
+              <div class="col-md-3">
+                <button onclick="validateEmail()" type="submit" class="mt-3 btn justify-content-end btn-success rounded-pill px-4">
+                  <div class="d-flex align-items-center">
+                    <i class="ti ti-device-floppy me-1 fs-4"></i>
+                    Save
+                  </div>
+                </button>
+
+                <button onclick="cancle()" type="button" class="mt-3 btn justify-content-end btn-danger rounded-pill px-4">
+                  <div class="d-flex align-items-center">
+                    Cancl
+                  </div>
+                </button>
+              </div>
+
+          </div>
+        </div>
+
+
+
+
+
+
+        </form>
+
+
+
+
+      </div>
+    </div>
+
+
+    <script>
+
+      function error_show(element,span){
+
+          span.textContent = "Please Enter valid " + element + " Details";
+          event.preventDefault();
+        
+      }
+
+function validateEmail(){
+
+const EmailID = document.getElementsByName('EmailID').value;
+const DepartmentID = document.getElementsByName('DepartmentID').value;
+const Name = document.getElementsByName('Name').value;
+const Mobile = document.getElementsByName('Mobile').value;
+const UserName = document.getElementById('UserName').value;
+const Passwod = document.getElementById('Password').value
+const ee = document.getElementById('ee');
+const pe = document.getElementById('pe');
+const de = document.getElementById('de');
+const ne = document.getElementById('ne');
+const ue = document.getElementById('ue');
+// Regular expression for a simple email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+alert(EmailID)
+
+if (EmailID == undefined) {
+  ee.innerText = "Invalid Email"
+  event.preventDefault();
+}
+// }
+// else if (DepartmentID == undefined) {
+//   de.innerText = "Invalid DepartmentID"
+//   event.preventDefault();
+// }
+// else if (Name == "") {
+//   ne.innerText = "Invalid Name"
+//   event.preventDefault();
+// }
+// else if (Mobile == undefined) {
+//   me.innerText = "Invalid Mobile"
+//   event.preventDefault();
+// }
+// else if (UserName == undefined) {
+//   ue.innerText = "Invalid Username"
+//   event.preventDefault();
+// }
+// else if (Password == undefined) {
+//   pe.innerText = "Invalid Password"
+//   event.preventDefault();
+// }else{
+  
+// }
+}
+
+      function cancle(){
+        window.location.href="/addTeacher"
+      }
+    </script>
+    <%- include('../Partial/footer.ejs') %>

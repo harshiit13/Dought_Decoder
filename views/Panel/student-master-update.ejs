@@ -1,0 +1,169 @@
+<%- include('../Partial/head.ejs') %>
+<%- include('../Partial/header.ejs') %>
+
+
+<div class="body-wrapper">
+  <div class="container-fluid" style="padding-top: 150px !important;">
+
+
+    <div class="d-flex align-items-center justify-content-center mb-2">
+      <div class="d-flex align-items-center justify-content-center rounded-circle" style="width: 110px; height: 110px;" ;="">
+        <div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;" ;="">
+          
+
+          <img src="../../uploads/Student/<%= Studentdata[0].StudentPhoto %>"  class="rounded-circle" width="80" height="80">
+          
+        </div>
+      </div>
+    </div>
+
+            <div class="card card-body" style="padding-top: 20px !important;">
+          
+            
+                <div class="px-4 py-3 border-bottom">
+                    <h5 class="card-title fw-semibold mb-0">View Student</h5>
+                  </div>
+
+
+
+                  <form action="/Student/setStudent" method="post"  enctype="multipart/form-data">
+
+
+
+
+                    <div class="form-row">
+                
+                
+                      <input type="hidden" value="<%= id %>" name="StudentID" >
+                      <input type="hidden" value="<%= Studentdata[0].AdminID %>" name="AdminID" >
+                
+                   <div class="form-group col-md-3">
+                        <label for="inputState">Department</label>
+                        <select required name="DepartmentID" id="inputState" class="form-control">
+                          <option selected value="<%= Studentdata[0].DepartmentID %>" ><%= Studentdata[0].DepartmentName %></option>
+                          <% for (d1 of Departmentdata){ %>
+                          <option value="<%= d1.DepartmentID %>"><%= d1.DepartmentName %></option>
+                          <% } %>
+                        </select>
+                      </div>
+                
+                
+                        <div class="form-group col-md-3">
+                          <label for="inputState">Course</label>
+                          <select required name="CourseID" id="inputState" class="form-control">
+                            <option selected value="<%= Studentdata[0].CourseID %>"><%= Studentdata[0].CourseName %></option>
+                            <% for (c of Coursedata){ %>
+                            <option value="<%= c.CourseID %>"><%= c.CourseName %></option>
+                            <% } %>
+                          </select>
+                        </div> 
+                
+                        <div class="form-group col-md-3">
+                          <label for="inputZip">Mobile Number</label>
+                          <input value="<%= Studentdata[0].Mobile %>" required name="Mobile" placeholder="Mobile Number" type="text" class="form-control" id="inputZip">
+                        </div>
+                
+                
+                        <div class="form-group col-md-3">
+                          <label for="inputCity">Name</label>
+                          <input value="<%= Studentdata[0].Name %>"  required placeholder="Name" name="Name" type="text" class="form-control" id="inputCity">
+                        </div>
+                
+                          
+                      </div>
+                
+                
+                 <div class="row mt-s">
+                        
+                
+                
+                      <div class="form-group col-md-3">
+                        <label for="inputZip">BirthDate</label>
+                        <input value="<%= Studentdata[0].BirthDate %>" required name="BirthDate" type="date" class="form-control" id="inputZip">
+                      </div>
+                
+                          
+                
+                          <div class="form-group col-md-3">
+                            <label for="Name">Enrollment Number</label>
+                            <input value="<%= Studentdata[0].EnrollmentNo %>"  type="text" required   class="form-control" name="EnrollmentNo" id="name" placeholder="EnrollmentNo">
+                          </div>
+                          
+                
+                          <div class="form-group col-md-3">
+                            <label for="Name">UserName</label>
+                            <input value="<%= Studentdata[0].UserName %>"  required type="text"    class="form-control" name="UserName" id="name" placeholder="UserName">
+                          </div>
+                
+                          <div class="form-group col-md-3">
+                            <label for="Name">Passwod</label>
+                            <input value="<%= Studentdata[0].Password %>"   required type="password"  class="form-control" name="Password" id="StudentPhoto" placeholder="Enter Passworrd">
+                          </div>
+                
+                
+                        
+                
+                    </div>
+                
+                
+                    <div class="row">
+                                
+                
+                      <div class="form-group col-md-4">
+                        <label for="Name">Studednt Photo</label>
+                        <input  type="file"  class="form-control" name="StudentPhoto" id="StudentPhoto" placeholder="Select Photo">
+                        <input type="hidden" name="StudentPhoto" value="<%= Studentdata[0].StudentPhoto %>"" >
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="Name">Semeste</label>
+                        <input value="<%= Studentdata[0].Semester %>"  required type="number"  class="form-control" name="Semester" id="StudentPhoto" placeholder="Enter Semester">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="Name">EmailID</label>
+                        <input value="<%= Studentdata[0].EmailID %>"  type="email"  class="form-control" name="EmailID" id="StudentPhoto" placeholder="Enter EmailID">
+                      </div>
+                
+                
+                    </div>
+                
+                    <div class="row">
+                      <div class="col-md-3"></div>
+                      <div class="col-md-3"></div>
+                      <div class="col-md-3"></div>
+                      <div class="col-md-3">
+                        <button type="submit" class="btn waves-effect waves-light btn-secondary">
+                          Save
+                        </button>
+                
+                        <button type="button" onclick="cancle()" class= "ms-3 btn mb-1 waves-effect waves-light btn-rounded btn-danger">
+                          Cancle
+                        </button>
+                      </div>
+                    </div>
+                
+                
+                </form>
+
+
+
+
+
+</div>
+
+
+            <script>
+              function cancle(){
+                window.location.href = "/viewStudent"
+              }
+            </script>
+
+</div>
+
+</div>
+
+
+
+
+
+
+<%- include('../Partial/footer.ejs') %>

@@ -1,0 +1,56 @@
+<%- include('../Partial/head.ejs') %>
+        <div class="body-wrapper">
+            <div class="container-fluid">
+                
+
+                
+                <div class="authentication-login min-vh-100 bg-body row justify-content-center align-items-center ">
+                    <div class="col-sm-8 col-md-6 col-xl-9">
+                      <h2 class="mb-3 fs-7 fw-bolder">Welcome to Dought Decoder</h2>
+                      <p class=" mb-3">Login Page</p>   
+                      <div class="position-relative text-center my-4">
+
+
+
+            <% if(error == 1){ %>
+
+                          <div class="alert alert-danger" role="alert">
+                            <b> Please Enter Valid Username or Password </b>
+                          </div>
+
+                          <% } %>
+
+
+
+
+                        <h5 class="mt-4">Select User</h5>
+
+
+                    
+
+                      </div>
+                      <form method="post" action="/login">
+                        <select required name="UserType" id="usertype" class="select2 form-control custom-select select2-hidden-accessible" style="width: 100%; height: 36px" data-select2-id="select2-data-4-vnvx" tabindex="-1" aria-hidden="true">
+                            
+                              <option value="Admin">Admin</option>
+                              <option value="Student">Student</option>
+                              <option value="Teacher">Teacher</option>
+                          </select>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Username</label>
+                          <input required type="text" class="form-control" name="UserName" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-4">
+                          <label for="exampleInputPassword1" class="form-label">Password</label>
+                          <input required type="password" class="form-control" name="Password" id="exampleInputPassword1">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign In</button>
+                      </form>
+                    </div>
+                  </div>
+
+
+
+            </div>
+        </div>
+        <%- include('../Partial/footer.ejs') %>

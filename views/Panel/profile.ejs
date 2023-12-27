@@ -1,0 +1,142 @@
+<%- include('../Partial/head.ejs') %>
+    <%- include('../Partial/header.ejs') %>
+        <div class="body-wrapper">
+            <div class="container-fluid">
+                
+
+
+
+
+<div class="card-body p-0">
+
+    <div class="row align-items-center">
+      <div class="col-lg-4 order-lg-1 order-2">
+
+      </div>
+      <div class="col-lg-4 mt-n3 order-lg-2 order-1">
+        <div class="mt-n5">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <div class=" d-flex align-items-center justify-content-center rounded-circle" style="width: 110px; height: 110px;" ;="">
+              <div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;" ;="">
+                
+                <% if(type == "Admin"){ %>
+
+                  <img src="../../dist/images/profile/user-7.jpg" alt="" class="w-100 h-100">
+
+                  <% }else if(type == "Teacher"){ %>
+                
+                <img src="../../uploads/<%= type %>/<%= data[0].TeacherPhoto %>" alt="" class="w-100 h-100">
+<% }else{ %>
+  <img src="../../uploads/<%= type %>/<%= data[0].StudentPhoto %>" class="rounded-circle" width="80" height="80">
+  <% } %>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <h5 class="fs-5 mb-0 fw-semibold"><%= data[0].Name %></h5>
+            <p class="mb-0 fs-4"><%= data[0].DepartmentName %></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <% if(type == "Admin"){ %>
+
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-lg-8">
+        <div class="card shadow-none border">
+          <div class="card-body">
+            <h4 class="fw-semibold mb-3">Name : <%= data[0].Name %></h4>
+  
+            <ul class="list-unstyled mb-0" style="margin-top: 40px;">
+              <li class="d-flex align-items-center gap-3 mb-4">
+                <i class="ti ti-briefcase text-dark fs-6"></i>
+                <h6 class="fs-4 fw-semibold mb-0">Indus University</h6>
+              </li>
+              <li class="d-flex align-items-center gap-3 mb-4">
+                <i class="ti ti-mail text-dark fs-6"></i>
+                <h6 class="fs-4 fw-semibold mb-0">Mobile Noumber : <%= data[0].Mobile %></h6>
+              </li>
+              <li class="d-flex align-items-center gap-3 mb-4">
+                <i class="ti ti-device-desktop text-dark fs-6"></i>
+                <h6 class="fs-4 fw-semibold mb-0">User Name : <%= data[0].UserName %></h6>
+              </li>
+              <li class="d-flex align-items-center gap-3 mb-2">
+                <i class="ti ti-map-pin text-dark fs-6"></i>
+                <h6 class="fs-4 fw-semibold mb-0">Password : <%= data[0].Password %></h6>
+
+                <button onclick="showform()" class="btn btn-info">Change Passwod</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <form style="display: none;margin-bottom: 20px;" id="passform" action="">
+        <div class="row">
+        <div class="col-6">
+        <input class="form-control" type="text" name="Password" value="<%= data[0].Password %>">
+      </div>
+      <div class="col-3">
+        <button class="btn btn-success">Change</button>
+
+      </div>
+    </div>
+      </form>
+
+
+  <% }else{ %>
+
+
+
+  <div class="row" style="margin-top: 30px;">
+    <div class="col-lg-8">
+      <div class="card shadow-none border">
+        <div class="card-body">
+          <h4 class="fw-semibold mb-3">Name : <%= data[0].Name %></h4>
+
+          <ul class="list-unstyled mb-0" style="margin-top: 40px;">
+            <li class="d-flex align-items-center gap-3 mb-4">
+              <i class="ti ti-briefcase text-dark fs-6"></i>
+              <h6 class="fs-4 fw-semibold mb-0">Indus University</h6>
+            </li>
+            <li class="d-flex align-items-center gap-3 mb-4">
+              <i class="ti ti-mail text-dark fs-6"></i>
+              <h6 class="fs-4 fw-semibold mb-0">Email ID : <%= data[0].EmailID %></h6>
+            </li>
+            <li class="d-flex align-items-center gap-3 mb-4">
+              <i class="ti ti-device-desktop text-dark fs-6"></i>
+              <h6 class="fs-4 fw-semibold mb-0">Department : <%= data[0].DepartmentName %></h6>
+            </li>
+            <li class="d-flex align-items-center gap-3 mb-2">
+              <i class="ti ti-map-pin text-dark fs-6"></i>
+              <h6 class="fs-4 fw-semibold mb-0">Mobile Noumber : <%= data[0].Mobile %></h6>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <% } %>
+
+
+
+</div>
+</div>
+
+<script>
+  function showform(){
+    $('#passform').css('display','block')
+
+  }
+</script>
+
+
+<%- include('../Partial/footer.ejs') %>

@@ -1,0 +1,98 @@
+<%- include('../Partial/head.ejs') %>
+<%- include('../Partial/header.ejs') %>
+
+
+<div class="body-wrapper">
+  <div class="container-fluid" style="padding-top: 150px !important;">
+
+
+    <div class="card card-body" style="padding-top: 20px !important;">
+
+
+        <form action="/TeacherSubjectDetail/setTeacherSubjectDetail" method="post">
+
+            <div class="row">
+               
+
+                <input type="hidden" name="TeacherID" value="<%=data[0].TeacherID%>"class="form-control">
+
+<input type="hidden" name="DepartmentID" value="<%= data[0].DepartmentID %>" >
+
+
+
+              <div class="form-group col-md-4">
+                <label for="inputState">Course<span class="text-danger ml-1">*</span></label>
+                <select name="CourseID" id="DepartmentID" class="form-control" required>
+                  <option disabled selected>--Select Couse--</option>
+
+                  <% for(c of courses){ %>
+                    <option  value=" <%= c.CourseID %> "><%= c.CourseName %></option>
+
+                  <% } %>
+
+                </select>
+                <span id="de" class="text-danger ml-1"></span>
+              </div>
+
+
+
+              <div class="form-group col-md-4">
+                <label for="inputState">Subjects<span class="text-danger ml-1">*</span></label>
+                <select multiple required name="SubjectID" id="DepartmentID" class="form-control" >
+                  <option  selected >--Select Subjects--</option>
+
+                  <% for(s of subjects){ %>
+                    <option  value="<%= s.SubjectID %>"><%= s.SubjectName %></option>
+
+                  <% } %>
+
+                </select>
+                <span id="de" class="text-danger ml-1"></span>
+              </div>
+
+
+
+
+
+
+            </div>
+
+
+            
+    <div class="row mt-3">
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+          <button type="submit" class="btn waves-effect waves-light btn-secondary">
+            Save
+          </button>
+  
+          <button onclick="cancle()" type="button" class= "ms-3 btn mb-1 waves-effect waves-light btn-rounded btn-danger">
+            Cancle
+          </button>
+        </div>
+      </div>
+
+
+        </form>
+
+        </div>
+
+
+    
+</div>
+
+</div>
+
+
+<script>
+  function onclick(){
+    window.location.href = "/"
+  }
+
+</script>
+
+
+
+<%- include('../Partial/footer.ejs') %>

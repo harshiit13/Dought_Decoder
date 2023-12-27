@@ -1,0 +1,232 @@
+<%- include('../Partial/head.ejs') %>
+  <%- include('../Partial/header.ejs') %>
+    <div class="body-wrapper">
+      <div class="container-fluid" style="padding-top: 150px !important;">
+
+
+
+        <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="exampleModalLabel1">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header d-flex align-items-center">
+                <h4 class="modal-title" id="exampleModalLabel1">
+                  Enter Pin
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="recipient-name" class="control-label">PIN:</label>
+                  <input type="text" class="form-control" id="PinNo" >
+                </div>
+                <span id="spanPassword" style="display: none;">Passwod is:
+                  <label id="userPassword" for="message-text" class="control-label"></label></span>
+
+                  <span id="wrongpass" class="text-danger" style="display: none;">Please Enter Correct Passwod
+                    </span>
+
+                    <span id="emptypass" class="text-danger" style="display: none;">Please Enter Pin
+                     </span>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="chkPassword()">
+                  Show Password
+                </button>
+                <button type="button" class="btn btn-light-danger text-danger font-medium" data-bs-dismiss="modal">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="table-responsive rounded-2 mb-4">
+          <table class="table border text-nowrap customize-table mb-0 align-middle">
+            <thead class="text-dark fs-4">
+              <tr>
+                <th>
+                  <h6 class="fs-4 fw-semibold mb-0">Teacher Name</h6>
+                </th>
+                <th>
+                  <h6 class="fs-4 fw-semibold mb-0">Department Name</h6>
+                </th>
+                <th>
+                  <h6 class="fs-4 fw-semibold mb-0">Email</h6>
+                </th>
+                <th>
+                  <h6 class="fs-4 fw-semibold mb-0">Mobile</h6>
+                </th>
+                <th>
+                  <h6 class="fs-4 fw-semibold mb-0">Username</h6>
+                </th>
+                <th>
+                  <h6 class="fs-4 fw-semibold mb-0">Password</h6>
+                </th>
+                <th>
+                  <h6 class="fs-4 fw-semibold mb-0">Edit</h6>
+                </th>
+                <th>
+                  <h6 class="fs-4 fw-semibold mb-0">Update</h6>
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (teacher of data){ %>
+
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+
+                      <img src="/uploads/Teacher/<%= teacher.TeacherPhoto %>" class="rounded-circle" width="40"
+                        height="40">
+
+
+
+                      <div class="ms-3">
+                        <h6 class="fs-4 fw-semibold mb-0">
+                          <%= teacher.Name %>
+                        </h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="mb-0 fw-normal">
+                      <%= teacher.DepartmentName %>
+                    </p>
+                  </td>
+                  <td>
+                    <p class="mb-0 fw-normal">
+                      <%= teacher.EmailID %>@gaj
+                    </p>
+                  </td>
+                  <td>
+                    <p class="mb-0 fw-normal">
+                      <%= teacher.Mobile %>
+                    </p>
+                  </td>
+
+                  <% if(type=="Admin" ){ %>
+                    <td>
+                      <p class="mb-0 fw-normal">
+                        <%= teacher.UserName %>
+                      </p>
+                    </td>
+                    <td>
+
+                      <button type="button" class="btn btn-primary"
+                        onclick="openPasswordModel('<%= teacher.Password %>')">
+                        <i class="fa fa-eye"></i>
+                      </button>
+
+
+
+                    </td>
+                    <% } %>
+                      <% if(type=="Admin" ){ %>
+                        <td>
+
+                          <form action="/viewTeacher" method="post">
+                            <input type="hidden" name="TeacherID" value="<%= teacher.TeacherID %>">
+                            <button type="submit" class="btn justify-content-end btn-primary rounded-pill px-4">
+                              <div class="d-flex align-items-center">
+                                Edit
+                              </div>
+                            </button>
+                          </form>
+                        </td>
+                        <td>
+
+                          <form action="/removeTeacher/<%= teacher.TeacherID %>" method="">
+                            <button type="submit" class="btn justify-content-end btn-danger rounded-pill px-4">
+                              <div class="d-flex align-items-center">
+                                Delete
+                              </div>
+                            </button>
+                          </form>
+                        </td>
+                        <% } %>
+                </tr>
+
+                <% } %>
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+    <script>
+
+
+
+
+
+      function BindTimeSlot() {
+        let TeacherID = $("#TeacherID").val();
+        if (TeacherID != "") {
+          $.ajax({
+            async: false,
+            url: '/BindTeacherTimeSlot/' + TeacherID,
+            success: function (res) {
+              if (res.data.length > 0) {
+                $("#SlotID").empty();
+                $("#SlotID").append($("<option></option>").val("").html('---Select Slot---'));
+                $.each(res.data, function (data, value) {
+                  $("#SlotID").append($("<option></option>").val(value.TeacherTimeSlotDetailID).html(value.TimeSlot));
+                });
+              } else {
+                $("#SlotID").empty();
+                $("#SlotID").append($("<option></option>").val("").html('---Select Slot Name---'));
+              }
+            },
+            error: function (xhr, status, error) {
+              $("#SlotID").empty();
+              $("#SlotID").append($("<option></option>").val("").html('---Select Slot Name---'));
+              alert(error);
+            }
+          })
+        }
+      }
+
+
+
+
+
+      function edit() {
+        window.location.href = "/viewTeacher"
+      }
+
+      function openPasswordModel(pwd) {
+        $("#passwordModal").modal('show');
+        $("#userPassword")[0].innerHTML = pwd;
+
+        $("#spanPassword").css('display', 'none');
+        $("#wrongpass").css('display', 'none');
+        $("#emptypass").css('display', 'none');
+        $("#PinNo").val('') 
+
+
+      }
+
+      function chkPassword() {
+        if ($("#PinNo").val() != "") {
+          if ($("#PinNo").val() == "1234") {
+            $("#spanPassword").css('display', 'inline-block');
+          } else {
+            $("#spanPassword").css('display', 'none');
+            
+            $("#wrongpass").css('display','inline-block')
+          }
+        } else {
+           $("#emptypass").css('display','inline-block')
+        }
+      }
+
+    </script>
+    <%- include('../Partial/footer.ejs') %>

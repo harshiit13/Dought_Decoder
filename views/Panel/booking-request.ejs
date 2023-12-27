@@ -1,0 +1,147 @@
+<%- include('../Partial/head.ejs') %>
+  <%- include('../Partial/header.ejs') %>
+    <div class="body-wrapper">
+      <div class="container-fluid">
+
+
+
+        <div class="card card-body" style="padding-top: 20px !important;">
+
+
+
+
+          <% if(data != []){ %>
+
+          <div class="table-responsive rounded-2 mb-4">
+            <table class="table border text-nowrap customize-table mb-0 align-middle">
+              <thead class="text-dark fs-4">
+                <tr>
+                  <th>
+                    <h6 class="fs-4 fw-semibold mb-0">Student Name</h6>
+                  </th>
+                  <% if(type=="Admin" ){ %>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Teacher Name</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Department Name</h6>
+                    </th>
+
+
+                    <% } %>
+                  <th>
+                    <h6 class="fs-4 fw-semibold mb-0">Subject</h6>
+                  </th>
+                  <th>
+                    <h6 class="fs-4 fw-semibold mb-0">Start Time</h6>
+                  </th>
+                  <th>
+                    <h6 class="fs-4 fw-semibold mb-0">End Time</h6>
+                  </th>
+                  <th>
+                    <h6 class="fs-4 fw-semibold mb-0">Title</h6>
+                  </th>
+                  <th>
+                    <h6 class="fs-4 fw-semibold mb-0">Description</h6>
+                  </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (d of data){ %>
+
+                  <tr>
+                    <td>
+                      <p>
+                        <%= d.StudentName %>
+                      </p>
+                    </td>
+                    <% if(type=="Admin" ){ %>
+                      <td>
+                        <p>
+                          <%= d.TeacherName %>
+                        </p>
+                      </td>
+                      <td>
+                        <p>
+                          <%= d.DepartmentName %>
+                        </p>
+                      </td>
+
+                      <% } %>
+                        <td>
+                          <p>
+                            <%= d.SubjectName %>
+                          </p>
+                        </td>
+                        <td>
+                          <p>
+                            <%= d.StartTime %>
+                          </p>
+                        </td>
+                        <td>
+                          <p>
+                            <%= d.EndTime %>
+                          </p>
+                        </td>
+                        <td>
+                          <p>
+                            <%= d.Title %>
+                          </p>
+                        </td>
+                        <td>
+                          <p>
+                            <%= d.Description %>
+                          </p>
+                        </td>
+                        <% if(type=="Teacher" ){ %>
+                          <td>
+                            <div class="col-4">
+                                <a href="/acceptBooking/<%= d.BookingID %>"
+                                  class="mr-3 btn ms-5 mb-1 waves-effect waves-light btn-outline-success">Accept</a>
+
+                                <a href="/declineBooking/<%= d.BookingID %>"
+                                  class="mr-3 btn ms-5 mb-1 waves-effect waves-light btn-outline-danger">Decline</a>
+
+                            </div>
+                          </td>
+                          <% } %>
+                  </tr>
+
+                  <% } %>
+              </tbody>
+            </table>
+          </div>
+
+
+
+
+
+
+
+
+
+            <% } %>
+
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <script>
+
+      function accept() {
+        var status = document.getElementsByName('Status')
+        status.values = "Accepted"
+      }
+      function decline() {
+        var status = document.getElementsByName('Status')
+        status.values = "Declined"
+      }
+
+    </script>
+    <%- include('../Partial/footer.ejs') %>
