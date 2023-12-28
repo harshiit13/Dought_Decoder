@@ -93,6 +93,40 @@ exports.getSubject = [async (req, res) => {
 }
 }];
 
+
+exports.bindSubject = [async (req, res) => {
+
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
+    try {
+        await Connection.connect();
+        var data = [
+            { name: 'Query', value: 'SelectAll' },
+            { name: 'SubjectID', value: null },
+            { name: 'CourseID', value: req.params.id},
+            { name: 'IsActive', value: true },
+            { name: 'IsDelete', value: false },
+        ]
+        const result = await dataAccess.execute(`SP_Subject`, data);
+        if (result.recordset && result.recordset[0]) {
+            const Subjectdata = result.recordset;
+            if (Subjectdata.length > 0) {
+                res.status(200).json({ status: 1, message: "Success.", data: Subjectdata, error: null });
+            }
+            else {
+                res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+            }
+        }
+        else {
+            res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+        }
+    } catch (error) {
+        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+    }
+}
+}];
+
 exports.addSubject = async(req,res) =>{
 
     if(!req.cookies.UserData){

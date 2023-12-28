@@ -5,10 +5,18 @@
 
 
 
+        <label for="filterr">Filter Status</label>
+
+        <select onchange="filterstatus()" class="form-control" name="filter" id="filter">
+          <option value="Pending">--Choose Filter--</option>
+          <option value="Pending">Pending</option>
+          <option value="Accepted">Accepted</option>
+          <option value="Declined">Declined</option>
+        </select>
+
+
         <div class="card card-body" style="padding-top: 20px !important;">
-
-
-
+         
 
           <% if(data != []){ %>
 
@@ -43,6 +51,9 @@
                   </th>
                   <th>
                     <h6 class="fs-4 fw-semibold mb-0">Description</h6>
+                  </th>
+                  <th>
+                    <h6 class="fs-4 fw-semibold mb-0">Status</h6>
                   </th>
                   <th></th>
                 </tr>
@@ -90,12 +101,12 @@
                           </p>
                         </td>
                         <td>
-                        <p >
+                        <p>
                             <%= d.Description %>
                         </p>
                           
                         </td>
-                        <% if(type=="Teacher" ){ %>
+                        <% if(type=="Teacher" && d.Status == "Pending" ){ %>
                           <td>
                             <div class="col-2">
                                 <a href="/acceptBooking/<%= d.BookingID %>"
@@ -106,7 +117,32 @@
 
                             </div>
                           </td>
-                          <% } %>
+                          <% }if(type=="Teacher" && d.Status == "Accepted" ){ %>
+                            <td>
+                            <span class="mb-1 badge font-medium bg-light-success text-success">Accepted</span>
+                          </td>
+                            <% }if(type=="Teacher" && d.Status == "Declined" ){ %>
+                              <td>
+                              <span class="mb-1 badge font-medium bg-light-danger text-danger">Declined</span>
+                            </td>
+                            <% } %>
+
+
+                            <% if(type=="Admin" && d.Status == "Pending" ){ %>
+                              <td>
+                                <span class="mb-1 badge font-medium bg-light-warning text-warning">Pending</span>
+                              </td>
+                              <% }if(type=="Admin" && d.Status == "Accepted" ){ %>
+                                <td>
+                                <span class="mb-1 badge font-medium bg-light-success text-success">Accepted</span>
+                              </td>
+                                <% }if(type=="Admin" && d.Status == "Declined" ){ %>
+                                  <td>
+                                  <span class="mb-1 badge font-medium bg-light-danger text-danger">Declined</span>
+                                </td>
+                                <% } %>
+
+
                   </tr>
 
                   <% } %>
@@ -135,13 +171,13 @@
 
     <script>
 
-      function accept() {
-        var status = document.getElementsByName('Status')
-        status.values = "Accepted"
+          function filterstatus(){
+      
+      let filter = $("#filter").val();
+      if (filter != "") {
+          window.location.href = '/filterequest/'+filter
       }
-      function decline() {
-        var status = document.getElementsByName('Status')
-        status.values = "Declined"
+      
       }
 
     </script>

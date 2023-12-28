@@ -239,13 +239,13 @@ exports.requests = [async (req, res) => {
         if(type == "Teacher"){
             var id1 = id
         }
-        console.log(id1)
+        console.log("Inside request from changing " , req.params.status)
         await Connection.connect();
         var data1 = [
             { name: 'Query', value: 'SelectAll' },
             { name: 'BookingID', value:  null },
             { name: 'TeacherID', value : id1 },
-            { name : 'Status' , value : 'Pending'},
+            { name : 'Status' , value : req.params.status},
             { name: 'IsActive', value: true },
             { name: 'IsDelete', value: false },
         ]
@@ -253,7 +253,6 @@ exports.requests = [async (req, res) => {
         if (result.recordset && result.recordset[0]) {
             const data = result.recordset;
             if (data.length > 0) {
-                console.log("About to render=======",data);
                 res.render('Panel/booking-request' , {name,id,type,data})
             }
             else {

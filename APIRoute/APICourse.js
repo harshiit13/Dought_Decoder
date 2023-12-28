@@ -131,6 +131,11 @@ router.get('/bookstatus',BookingSlot.getBookingSlot)
 router.get('/acceptBooking/:id',BookingSlot.accept)
 router.get('/declineBooking/:id',BookingSlot.reject)
 router.get('/bookingrequest',BookingSlot.requests)
+router.get('/filterequest/:status',BookingSlot.requests)
+router.get('/try/:status',(req,res)=>{
+    console.log('Inside trrry')
+    res.redirect('/filterequest/'+req.params.status)
+})
 router.delete('/BookingSlot/removeBookingSlot' , BookingSlot.removeBookingSlot)
 
 
@@ -157,6 +162,7 @@ router.get('/removeStudent/:id' , Student.removeStudent)
 
 
 
+
 const Subject = require("../Controller/Subject")
 router.post('/Subject/setSubject' , Subject.setSubject)
 router.get('/Subject/getSubject' , Subject.getSubject)
@@ -165,7 +171,7 @@ router.get('/addsubject',Subject.addSubject)
 router.get('/editsubject',Subject.editSubject)
 router.get('/removesubject/:id',Subject.removeSubject)
 router.delete('/Subject/removeSubject' , Subject.removeSubject)
-
+router.get('/BindSub/:id',Subject.bindSubject)
 
 
 

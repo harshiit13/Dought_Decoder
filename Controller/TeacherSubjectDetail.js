@@ -20,7 +20,7 @@ exports.setTeacherSubjectDetail = [async (req, res) => {
             const tid = req.body.TeacherID
 
 
-            for(var Sub of req.body.SubjectID){
+            var Sub = req.body.SubjectID
                 var que = "Insert"
 
 
@@ -40,7 +40,7 @@ exports.setTeacherSubjectDetail = [async (req, res) => {
 
                     for(var s of subs){
                         console.log(s.TeacherID,tid,s.SubjectID,Sub)
-                        if(s.TeacherID == tid && s.SubjectID == Sub){
+                        if(s.TeacherID == tid && s.SubjectID == Sub && s.CourseID == req.body.CourseID){
                             que = "Update";
                             console.log(que)
                             break;
@@ -65,7 +65,7 @@ exports.setTeacherSubjectDetail = [async (req, res) => {
         catch(error){
             return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
         }
-    }
+    
     res.redirect('/showTeacherSubjectDetail')
     }
 }

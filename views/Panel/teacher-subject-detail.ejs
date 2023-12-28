@@ -22,7 +22,7 @@
 
               <div class="form-group col-md-4">
                 <label for="inputState">Course<span class="text-danger ml-1">*</span></label>
-                <select name="CourseID" id="DepartmentID" class="form-control" required>
+                <select onchange="BindSubject()" name="CourseID" id="CourseID" class="form-control" required>
                   <option disabled selected>--Select Couse--</option>
 
                   <% for(c of courses){ %>
@@ -38,13 +38,13 @@
 
               <div class="form-group col-md-4">
                 <label for="inputState">Subjects<span class="text-danger ml-1">*</span></label>
-                <select multiple required name="SubjectID" id="DepartmentID" class="form-control" >
-                  <option  selected >--Select Subjects--</option>
+                <select required name="SubjectID" id="SubjectID" class="form-control" >
+                  <!-- <option  selected >--Select Subjects--</option>
 
                   <% for(s of subjects){ %>
                     <option  value="<%= s.SubjectID %>"><%= s.SubjectName %></option>
 
-                  <% } %>
+                  <% } %> -->
 
                 </select>
                 <span id="de" class="text-danger ml-1"></span>
@@ -90,6 +90,38 @@
   function onclick(){
     window.location.href = "/"
   }
+
+    function BindSubject(){
+
+let CourseID = $("#CourseID").val();
+if (CourseID != "") {
+    $.ajax({
+        async: false,
+        url: '/BindSub/' + CourseID,
+        success: function (res) {
+
+            if (res.data.length > 0) {
+                $("#SubjectID").empty();
+                $("#SubjectID").append($("<option></option>").val("").html('---Select Slot---'));
+                $.each(res.data, function (data, value) {
+                    
+                    $("#SubjectID").append($("<option></option>").val(value.SubjectID).html(value.SubjectName));
+                });
+            } else {
+                $("#SubjectID").empty();
+                $("#SubjectID").append($("<option></option>").val("").html('---Select Slot Name---'));
+            }
+        },
+        error: function (xhr, status, error) {
+            $("#SubjectID").empty();
+            $("#SubjectID").append($("<option></option>").val("").html('---Select Slot Name---'));
+            alert(error);
+        }
+    })
+}
+
+}
+
 
 </script>
 
