@@ -93,7 +93,9 @@ router.post('/login' , UserLoginController.chkUseLogin)
 const AboutUs = require("../Controller/AboutUs")
 router.post('/AboutUs/setAboutUs' , AboutUs.setAboutUs)
 router.get('/AboutUs/getAboutUs' , AboutUs.getAboutUs)
-router.get('/AboutUs/getAllAboutUs',AboutUs.getAllAboutUs)
+router.get('/addAAboutUs',(req,res)=>{
+    res.render('Panel/aboutus-form')
+})
 router.delete('/AboutUs/removeAboutUs' , AboutUs.removeAboutUs)
 
 
@@ -110,6 +112,7 @@ router.delete('/Admin/removeAdmin' , Admin.removeAdmin)
 const Banner = require("../Controller/Banner")
 router.post('/Banner/setBanner' , Banner.setBanner)
 router.get('/Banner/getBanner' , Banner.getBanner)
+router.get('/addBanner' ,Banner.addbanmner)
 router.delete('/Banner/removeBanner' , Banner.removeBanner)
 
 
@@ -143,6 +146,8 @@ router.delete('/BookingSlot/removeBookingSlot' , BookingSlot.removeBookingSlot)
 
 const ContactUs = require("../Controller/ContactUs")
 router.post('/ContactUs/setContactUs' ,ContactUs.setContactUs)
+router.get('/addContactus',ContactUs.addcontactus)
+router.get('/showContactus',ContactUs.viewcontactus)
 router.get('/ContactUs/getContactUs' , ContactUs.getContactUs)
 router.delete('/ContactUs/removeContactUs' , ContactUs.removeContactUs)
 
@@ -168,7 +173,7 @@ router.post('/Subject/setSubject' , Subject.setSubject)
 router.get('/Subject/getSubject' , Subject.getSubject)
 router.get('/allSubject',Subject.allSubject)
 router.get('/addsubject',Subject.addSubject)
-router.get('/editsubject',Subject.editSubject)
+router.get('/editsubject/:id',Subject.editSubject)
 router.get('/removesubject/:id',Subject.removeSubject)
 router.delete('/Subject/removeSubject' , Subject.removeSubject)
 router.get('/BindSub/:id',Subject.bindSubject)
@@ -225,7 +230,7 @@ router.get('/BindCourse/:id',Course.bindCourse)
 router.get('/Course' , Course.getCourseData)
 router.get('/addcourse' , Course.addCourse)
 router.get('/viewcourse' , Course.viewCourse)
-router.get('/editcourse',Course.editCourse)
+router.get('/editcourse/:id',Course.editCourse)
 router.get('/removecourse/:id',Course.removeCourse)
 router.delete('/Course/removeCourse' , Course.removeCourse)
 
@@ -236,7 +241,7 @@ const { request } = require('../app');
 router.post('/Department/setDepartment' , Department.setDepartment)
 router.get('/addDepartment',Department.addDepatmnt)
 router.get('/allDepatment',Department.getAllDepartment)
-router.get('/editDepatment',Department.editDepartment)
+router.get('/editDepatment/:id',Department.editDepartment)
 router.get('/Department/getDepartment' , Department.getDepartment)
 router.get('/Department/getAllDepartment' , Department.getAllDepartment)
 router.get('/removeDepartment/:id' , Department.removeDepartment)
@@ -244,7 +249,7 @@ router.get('/removeDepartment/:id' , Department.removeDepartment)
 router.get("/BindTeacherTimeSlot/:id", TeacherTimeSlotDetail.getTeacherTimeSlot);
 
 
-router.get('/' ,validation.validation, async(req,res)=>{
+router.get('/home' ,validation.validation, async(req,res)=>{
 
     if(!req.cookies.UserData){
         res.redirect('/Login')

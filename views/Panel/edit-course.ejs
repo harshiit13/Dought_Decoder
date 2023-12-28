@@ -9,7 +9,12 @@
 
     <div class="card card-body" style="padding-top: 20px !important;">
 
-      <form action="/Course/setCourse" method="post">
+      <div class="px-4 py-3 border-bottom">
+        <h5 class="card-title fw-semibold mb-0">Edit Course</h5>
+      </div>
+
+
+      <form class="mt-5" action="/Course/setCourse" method="post">
 
         <input type="hidden" name="CourseID" value="<%= data1[0].CourseID %>" id="">
         <div class="row">

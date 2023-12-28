@@ -29,7 +29,7 @@
                    
                     <td>
                       <div class="d-flex">
-                        <form action="/editDepatment" method="get">
+                        <form action="/editDepatment/<%= d.DepartmentID %>" method="get">
                           <input type="hidden" value="<%= d.DepartmentID %>" name="DepartmentID" >
                          <button class="btn btn-info">Edit</button>
                       

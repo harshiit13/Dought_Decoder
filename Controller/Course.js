@@ -246,7 +246,7 @@ exports.editCourse = [async (req, res) => {
         await Connection.connect();
         var data02 = [
             { name: 'Query', value: 'SelectAll' },
-            { name: 'CourseID', value: req.body.CourseID },
+            { name: 'CourseID', value: req.params.id },
             { name: 'IsActive', value: true },
             { name: 'IsDelete', value: false },
         ]

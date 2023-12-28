@@ -33,11 +33,10 @@
            
             <td>
               <div class="d-flex">
-                <form action="/editsubject" method="get">
-                  <input type="hidden" value="<%= d.SubjectID %>" name="SubjectID" >
-                 <button class="btn btn-info">Edit</button>
-              
-                </form>
+
+                <a href="/editsubject/<%= d.SubjectID %>"
+                  class="mr-3 btn ms-5 mb-1 waves-effect waves-light btn-outline-info">Edit</a>
+
                 </div>
             </td>
 

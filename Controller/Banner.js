@@ -77,6 +77,10 @@ exports.getBanner = [async (req, res) => {
 }];
 
 
+exports.addbanmner = async(req,res) =>{
+    res.render('Panel/add-banner')
+}
+
 exports.removeBanner = [async (req, res) => {
     try {
         if (!req.body.BannerID) {

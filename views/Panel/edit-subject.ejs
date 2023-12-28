@@ -6,10 +6,13 @@
   <div class="container-fluid" style="padding-top: 150px !important;">
 
 
-
     <div class="card card-body" style="padding-top: 20px !important;">
 
-      <form action="/Subject/setSubject" method="post">
+      <div class="px-4 py-3 border-bottom">
+        <h5 class="card-title fw-semibold mb-0">Edit Subject</h5>
+      </div>
+
+      <form class="mt-5" action="/Subject/setSubject" method="post">
 
         <input type="hidden" value="<%= data1[0].SubjectID %>" name="SubjectID">
         <div class="row">
@@ -17,7 +20,7 @@
         <div class="form-group col-md-4">
             <label for="inputState">Department<span class="text-danger ml-1">*</span></label>
             <select onchange="BindSubject()" required name="DepartmentID" id="DepartmentID" class="form-control">
-              <option selected value=" <%= data[0].DepartmentID %> "><%= data[0].DepartmentName %></option>
+              <option selected value=" <%= data1[0].DepartmentID %> "><%= dd[0].DepartmentName %></option>
               <% for (d of data){ %>
                 <option value="<%= d.DepartmentID %>">
                   <%= d.DepartmentName %>
@@ -31,6 +34,7 @@
           <div class="form-group col-md-4">
             <label for="inputState">Course<span class="text-danger ml-1">*</span></label>
             <select required name="CourseID" id="CourseID" class="form-control">
+              <option value="<%= cd[0].CourseID %>"><%= cd[0].CourseName %></option>
              
             </select>
             <span id="de" class="text-danger ml-1"></span>

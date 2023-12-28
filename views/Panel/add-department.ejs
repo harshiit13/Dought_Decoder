@@ -9,9 +9,14 @@
 
     <div class="card card-body" style="padding-top: 20px !important;">
 
-      <form action="/Department/setDepartment" method="post">
+      <div class="px-4 py-3 border-bottom">
+        <h5 class="card-title fw-semibold mb-0">Add Department</h5>
+      </div>
+
+
+      <form class="mt-5" action="/Department/setDepartment" method="post">
         <label for="">Enter Department Name</label>
-        <input class="form-control" type="text" name="DepartmentName" placeholder="Department Name" > 
+        <input style="max-width: 300px;" class="form-control" type="text" name="DepartmentName" placeholder="Department Name" > 
 
         <button class="btn btn-info mt-3">Submit</button>
       </form>

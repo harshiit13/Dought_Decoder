@@ -9,7 +9,13 @@
 
     <div class="card card-body" style="padding-top: 20px !important;">
 
-      <form action="/Department/setDepartment" method="post">
+
+      <div class="px-4 py-3 border-bottom">
+        <h5 class="card-title fw-semibold mb-0">Edit Department</h5>
+      </div>
+
+
+      <form class="mt-5" action="/Department/setDepartment" method="post">
         <label for="">Enter Department Name</label>
         <input value="<%= data[0].DepartmentName %>" class="form-control" type="text" name="DepartmentName" placeholder="Department Name" > 
 

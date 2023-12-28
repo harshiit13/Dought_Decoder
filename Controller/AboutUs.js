@@ -5,7 +5,70 @@ const Connection = require('../Connection')
 
 const router = express.Router();
 
+
+
+var multer = require('multer');
+const moment = require("moment");
+const fs = require('fs')
+const path = require('path');
+
+
+const BannerImageDIR = "./public/uploads/AboutUs";
+ console.log("BannerImageDIR", BannerImageDIR);
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        
+        cb(null, BannerImageDIR)
+    },
+    filename: function (req, file, cb) {
+        const fileName = `${moment().format("DD_MM_YYYY_HH_mm_ss")}` + '.png';
+        cb(null, fileName)
+    }
+});
+
+const imageFilter = function (req, file, cb) {
+    
+    var ext = path.extname(file.originalname);
+    if (file.fieldname == 'AboutUsImage') {
+        if (!['.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG'].includes(ext)) {
+            req.fileValidationError = 'only .jpg , png , jpeg';
+            return cb(new Error('only .jpg , png , jpeg'), false);
+        }
+    } else {
+        req.fileValidationError = 'invaild file';
+        return cb(new Error('invaild file'), false);
+    }
+    cb(null, true)
+}
+
+
+
+
 exports.setAboutUs = [async (req, res) => {
+
+
+    let upload = multer({ storage: storage, fileFilter: imageFilter }).single('AboutUsImage')
+    upload(req, res, async (err) => {
+        if (req.fileValidationError) {
+            return res.json({ status: 0, message: req.fileValidationError, data: [], error: null });
+        } else {
+            try {
+                // console.log("req.body---------setBanner---------", req.body);
+                // console.log("req.file---------setBanner---------", req.file);
+
+                await Connection.connect();
+                console.log("File Name == ",req.file);
+                var banner_image = ''
+
+                if (req.file) {
+                    banner_image = req.file ? req.file.filename : null
+                }
+                 else {
+                    banner_image = req.body.AboutUsImage ? req.body.AboutUsImage : null
+                }
+
+
 
     try{
         if (!req.body.Title) {
@@ -14,16 +77,13 @@ exports.setAboutUs = [async (req, res) => {
         else if (!req.body.Description) {
             res.json({ status: 0, message: "Please Enter Description", data: null, error: null });
         }
-        else if (!req.body.AboutUsImage) {
-            res.json({ status: 0, message: "Please Enter AboutUsImage", data: null, error: null });
-        }
         else {
             await Connection.connect();
 
             var data = [
                 {name:'Query' , value: req.body.AboutUsID ? 'Update' : 'Insert'},
                 {name : 'Title' , value : req.body.Title ? req.body.Title : null},
-                {name : 'AboutUsImage' , value : req.body.AboutUsImage ? req.body.AboutrUsImage : null},
+                {name : 'AboutUsImage' , value :banner_image ? banner_image : null},
                 {name : 'AboutUsID' , value : req.body.AboutUsID ? req.body.AboutUsID : null},
                 {name : 'AdminID' , value : req.body.AdminID ? req.body.AdminID : null},
                 {name : 'Description' , value : req.body.Description ? req.body.Description : null}
@@ -51,7 +111,11 @@ exports.setAboutUs = [async (req, res) => {
 }
 catch(error){
     return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
-}
+}}
+catch(error){
+    return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+}}
+})
 }
 ];
 
@@ -85,26 +149,6 @@ exports.getAboutUs = [async (req, res) => {
 }];
 
 
-exports.getAllAboutUs = async(req,res)=>{
-
-    const name = req.cookies.UserData[0].Name;
-    const id = req.cookies.UserData[0].UserID;
-    const type = req.cookies.UserData[0].UserType;
-
-    await Connection.connect();
-    var data1 = [
-        { name: 'Query', value: 'SelectAll' },
-        { name: 'AboutUsID', value: null },
-        { name: 'IsActive', value: true },
-        { name: 'IsDelete', value: false },
-    ]
-    const result = await dataAccess.execute(`SP_AboutUs`, data1);
-    const data = result.recordset
-
-    res.render('Panel/aboutus-table',{name,id,type,data})
-
-
-}
 
 
 exports.removeAboutUs = [async (req, res) => {

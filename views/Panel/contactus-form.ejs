@@ -1,0 +1,97 @@
+<%- include('../Partial/head.ejs') %>
+
+
+        <div class="body-wrapper">
+          <div class="container-fluid" style="padding-top: 150px !important;">
+
+
+
+              <div class="card card-body" style="padding-top: 20px !important;">
+          
+            
+                <div class="px-4 py-3 border-bottom">
+                    <h5 class="card-title fw-semibold mb-0">Contact Us</h5>
+                  </div>
+
+
+
+<form action="/ContactUs/setContactUs" method="post" >
+
+
+
+
+    <div class="form-row">
+
+    
+        <div class="form-group col-md-4">
+            <label for="inputCity">Name</label>
+            <input required placeholder="Name" name="Name" type="text" class="form-control" id="inputCity">
+          </div>
+
+
+
+        <div class="form-group col-md-4">
+          <label for="inputZip">Mobile Number</label>
+          <input required name="Mobile" placeholder="Mobile Number" type="text" class="form-control" id="inputZip">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="inputCity">EmailID</label>
+          <input required placeholder="Email id" name="EmailID" type="email" class="form-control" id="inputCity">
+        </div>
+
+          
+      </div>
+
+
+    <div class="row mt-s">
+        
+
+
+      <div class="form-group col-md-6">
+        <label for="inputZip">Subject</label>
+        <input required placeholder="Subject" name="Subject" type="text" class="form-control" id="inputZip">
+      </div>
+
+          
+
+          <div class="form-group col-md-6">
+            <label for="Name">Description</label>
+            <textarea type="text" required   class="form-control" name="Description" id="name" placeholder="Please Add Desciption"></textarea>
+          </div>
+          
+
+       
+
+
+        
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <button type="submit" class="btn waves-effect waves-light btn-secondary">
+          Save
+        </button>
+
+        <button type="button" onclick="cancle()" class= "ms-3 btn mb-1 waves-effect waves-light btn-rounded btn-danger">
+          Cancle
+        </button>
+      </div>
+    </div>
+
+
+</form>
+
+
+</div>
+
+
+
+</div>
+</div>
+<%- include('../Partial/footer.ejs') %>

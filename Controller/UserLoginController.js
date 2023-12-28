@@ -82,7 +82,7 @@ exports.chkUseLogin = [async (req, res) => {
                         maxAge: 2000 * 3600 
                     });
                     if (bodyUserType == "Admin"){
-                        res.redirect('/')
+                        res.redirect('/home')
                     }
 
                     if (bodyUserType == "Teacher"){

@@ -96,6 +96,54 @@ exports.getContactUs = [async (req, res) => {
 }];
 
 
+exports.addcontactus = async(req,res) =>{
+
+
+
+    res.render('Panel/contactus-form')
+
+}
+
+
+exports.viewcontactus = async(req,res) =>{
+
+    const name = req.cookies.UserData[0].Name;
+    const id = req.cookies.UserData[0].UserID;
+    const type = req.cookies.UserData[0].UserType;
+
+    
+    try {
+        await Connection.connect();
+        var data1 = [
+            { name: 'Query', value: 'SelectAll' },
+            { name: 'ContactUsID', value: null },
+            { name: 'AdminID', value:  null },
+            { name: 'IsActive', value: true },
+            { name: 'IsDelete', value: false },
+        ]
+        const result = await dataAccess.execute(`SP_ContactUs`, data1);
+        if (result.recordset && result.recordset[0]) {
+            const data = result.recordset;
+            if (data.length > 0) {
+                console.log(data);
+                res.render('Panel/contactus-info',{data,name,id,type})
+            }
+            else {
+                res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+            }
+        }
+        else {
+            res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+        }
+    } catch (error) {
+        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+    }
+
+
+ 
+}
+
+
 exports.removeContactUs = [async (req, res) => {
     try {
         if (!req.body.ContactUsID) {

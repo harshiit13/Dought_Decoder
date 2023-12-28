@@ -108,9 +108,10 @@ exports.editDepartment = [async (req, res) => {
         const id = req.cookies.UserData[0].UserID;
         const type = req.cookies.UserData[0].UserType;
         await Connection.connect();
+        console.log(req.body.DepartmentID);
         var data1 = [
             { name: 'Query', value: 'SelectAll' },
-            { name: 'DepartmentID', value: (req.body.DepartmentID) ? (req.body.DepartmentID) : null },
+            { name: 'DepartmentID', value: (req.params.id)},
             { name: 'AdminID', value: (req.body.AdminID) ? (req.body.AdminID) : null },
             { name: 'IsActive', value: true },
             { name: 'IsDelete', value: false },
@@ -119,6 +120,7 @@ exports.editDepartment = [async (req, res) => {
         if (result.recordset && result.recordset[0]) {
             const data = result.recordset;
             if (data.length > 0) {
+                console.log(data)
                 res.render('Panel/edit-department',{name,id,type,data})
             }
             else {

@@ -1,0 +1,75 @@
+<%- include('../Partial/head.ejs') %>
+        <div class="body-wrapper">
+            <div class="container-fluid">
+                
+
+                <div class="card card-body" style="padding-top: 20px !important;">
+          
+            
+                    <div class="px-4 py-3 border-bottom">
+                        <h5 class="card-title fw-semibold mb-0">Contact Us</h5>
+                      </div>
+    
+    
+    
+    <form action="/AboutUs/setAboutUs" method="post" enctype="multipart/form-data" >
+    
+    
+    
+    
+        <div class="row mt-s">
+            
+    
+    
+          <div class="form-group col-md-4">
+            <label for="inputZip">Title</label>
+            <input required placeholder="Title" name="Title" type="text" class="form-control" id="inputZip">
+          </div>
+    
+              
+    
+              <div class="form-group col-md-4">
+                <label for="Name">Description</label>
+                <textarea type="text" required   class="form-control" name="Description" id="name" placeholder="Please Add Desciption"></textarea>
+              </div>
+              
+    
+              <div class="form-group col-md-4">
+                <label for="Name">AboutUs Image</label>
+                <input type="file"  class="form-control" name="AboutUsImage" id="StudentPhoto" placeholder="Select Photo">
+              </div>
+    
+    
+            
+    
+        </div>
+    
+    
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-3"></div>
+          <div class="col-md-3"></div>
+          <div class="col-md-3">
+            <button type="submit" class="btn waves-effect waves-light btn-secondary">
+              Save
+            </button>
+    
+            <button type="button" onclick="cancle()" class= "ms-3 btn mb-1 waves-effect waves-light btn-rounded btn-danger">
+              Cancle
+            </button>
+          </div>
+        </div>
+    
+    
+    </form>
+    
+    
+    </div>
+    
+    
+                
+
+
+            </div>
+        </div>
+        <%- include('../Partial/footer.ejs') %>
