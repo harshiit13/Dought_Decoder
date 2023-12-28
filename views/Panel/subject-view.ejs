@@ -1,0 +1,66 @@
+<%- include('../Partial/head.ejs') %>
+<%- include('../Partial/header.ejs') %>
+
+
+<div class="body-wrapper">
+  <div class="container-fluid" style="padding-top: 150px !important;">
+
+
+
+
+    <div class="table-responsive rounded-2">
+        <table class="table border text-nowrap customize-table mb-0 align-middle">
+          <thead class="text-dark fs-4">
+            <tr>
+              <th><h6 class="fs-4 fw-semibold mb-0">Course Name</h6></th>
+              <th><h6 class="fs-4 fw-semibold mb-0">Subject Name</h6></th>
+              <th></th>
+              <% for (d of data){ %>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="d-flex">
+                    <h6 class="fw-semibold mb-1"><%= d.CourseName %></h6>
+                </div>
+              </td>
+              <td>
+              <div class="d-flex ">
+                <h6 class="fw-semibold mb-1"><%= d.SubjectName %></h6>
+            </div>
+            </td>
+           
+            <td>
+              <div class="d-flex">
+                <form action="/editsubject" method="get">
+                  <input type="hidden" value="<%= d.SubjectID %>" name="SubjectID" >
+                 <button class="btn btn-info">Edit</button>
+              
+                </form>
+                </div>
+            </td>
+
+            <td>
+              <form action="/removesubject/<%= d.SubjectID %>" method="get">
+           
+                <button type="submit" class="btn btn-danger">Delete</button>
+           
+            </form>
+            </td>
+
+
+            </tr>
+            <% } %>
+            
+          </tbody>
+        </table>
+      </div>
+
+
+
+
+    
+</div>
+</div>
+<%- include('../Partial/footer.ejs') %>

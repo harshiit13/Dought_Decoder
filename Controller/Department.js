@@ -7,6 +7,10 @@ const router = express.Router();
 
 exports.setDepartment = [async (req, res) => {
 
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
+
     try{
         if (!req.body.DepartmentName) {
             res.json({ status: 0, message: "Please Enter DepartmentName", data: null, error: null });
@@ -37,25 +41,34 @@ exports.setDepartment = [async (req, res) => {
         }
     }
 }
+    
 catch(error){
     return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
 }
+    }
 }
 ];
 
 
 exports.addDepatmnt = async(req,res) => {
+
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
     const name = req.cookies.UserData[0].Name;
     const id = req.cookies.UserData[0].UserID;
     const type = req.cookies.UserData[0].UserType;
     res.render('Panel/add-department',{name,id,type})
-
+    }
 }
 
 
 
 
 exports.getDepartment = [async (req, res) => {
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
     try {
         await Connection.connect();
         var data = [
@@ -81,10 +94,15 @@ exports.getDepartment = [async (req, res) => {
     } catch (error) {
         return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
     }
+}
 }];
 
 
 exports.editDepartment = [async (req, res) => {
+
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
     try {
         const name = req.cookies.UserData[0].Name;
         const id = req.cookies.UserData[0].UserID;
@@ -113,11 +131,16 @@ exports.editDepartment = [async (req, res) => {
     } catch (error) {
         return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
     }
+}
 }];
 
 
 
 exports.getAllDepartment = async (req,res)=>{
+
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
     const name = req.cookies.UserData[0].Name;
     const id = req.cookies.UserData[0].UserID;
     const type = req.cookies.UserData[0].UserType;
@@ -138,10 +161,14 @@ exports.getAllDepartment = async (req,res)=>{
     res.render('Panel/department-table',{name,id,type,data})
 
     
-
+    }
 }
 
 exports.removeDepartment = [async (req, res) => {
+
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
     try {
 
     
@@ -164,4 +191,5 @@ exports.removeDepartment = [async (req, res) => {
     } catch (error) {
         return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
     }
+}
 }];

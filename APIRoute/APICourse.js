@@ -12,6 +12,10 @@ const UserLoginController = require("../Controller/UserLoginController");
 const validation = require("../routes/validation")
 
 
+router.get('/error',(req,res)=>{
+    res.render('Panel/error')
+})
+
 router.get('/logout',(req,res)=>{
     res.cookie("UserData", "", { expires: new Date(0) });
     res.redirect('/Login')
@@ -156,7 +160,10 @@ router.get('/removeStudent/:id' , Student.removeStudent)
 const Subject = require("../Controller/Subject")
 router.post('/Subject/setSubject' , Subject.setSubject)
 router.get('/Subject/getSubject' , Subject.getSubject)
+router.get('/allSubject',Subject.allSubject)
 router.get('/addsubject',Subject.addSubject)
+router.get('/editsubject',Subject.editSubject)
+router.get('/removesubject/:id',Subject.removeSubject)
 router.delete('/Subject/removeSubject' , Subject.removeSubject)
 
 
@@ -210,6 +217,10 @@ router.post('/Course/setCourse', Course.setCourse)
 router.get('/Course/getCourse' , Course.getCourse)
 router.get('/BindCourse/:id',Course.bindCourse)
 router.get('/Course' , Course.getCourseData)
+router.get('/addcourse' , Course.addCourse)
+router.get('/viewcourse' , Course.viewCourse)
+router.get('/editcourse',Course.editCourse)
+router.get('/removecourse/:id',Course.removeCourse)
 router.delete('/Course/removeCourse' , Course.removeCourse)
 
 
@@ -225,7 +236,6 @@ router.get('/Department/getAllDepartment' , Department.getAllDepartment)
 router.get('/removeDepartment/:id' , Department.removeDepartment)
 
 router.get("/BindTeacherTimeSlot/:id", TeacherTimeSlotDetail.getTeacherTimeSlot);
-
 
 
 router.get('/' ,validation.validation, async(req,res)=>{

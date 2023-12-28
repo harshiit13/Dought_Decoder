@@ -1,0 +1,52 @@
+<%- include('../Partial/head.ejs') %>
+<%- include('../Partial/header.ejs') %>
+
+
+<div class="body-wrapper">
+  <div class="container-fluid" style="padding-top: 150px !important;">
+
+
+
+    <div class="card card-body" style="padding-top: 20px !important;">
+
+      <form action="/Course/setCourse" method="post">
+
+        <input type="hidden" name="CourseID" value="<%= data1[0].CourseID %>" id="">
+        <div class="row">
+      
+        <div class="form-group col-md-4">
+            <label for="inputState">Department<span class="text-danger ml-1">*</span></label>
+            <select required name="DepartmentID" id="DepartmentID" class="form-control">
+              <option value="<%= data1[0].DepartmentID %>" selected ><%= data1[0].DepartmentName %> </option>
+              <% for (d of data){ %>
+                <option value="<%= d.DepartmentID %>">
+                  <%= d.DepartmentName %>
+                </option>
+                <% } %>
+            </select>
+            <span id="de" class="text-danger ml-1"></span>
+          </div>
+
+
+
+          <div class="form-group col-md-4">
+            <label for="inputState">Enter Course Name<span class="text-danger ml-1">*</span></label>
+            <input value="<%= data1[0].CourseName %>" class="form-control" type="text" name="CourseName" id="CourseName" placeholder="Course Name">
+          </div>
+
+        </div>
+
+        <button class="btn btn-info mt-3">Submit</button>
+      </form>
+
+
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+<%- include('../Partial/footer.ejs') %>

@@ -6,6 +6,10 @@ const Connection = require('../Connection')
 const router = express.Router();
 
 exports.setBookingSlot = [async (req, res) => {
+
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
     const name = req.cookies.UserData[0].Name;
     const id = req.cookies.UserData[0].UserID;
     const type = req.cookies.UserData[0].UserType;
@@ -71,10 +75,14 @@ catch(error){
     return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
 }
 }
+}
 ];
 
 
 exports.getBookingSlot = [async (req, res) => {
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
     const name = req.cookies.UserData[0].Name;
     const id = req.cookies.UserData[0].UserID;
     const type = req.cookies.UserData[0].UserType;
@@ -104,10 +112,15 @@ exports.getBookingSlot = [async (req, res) => {
     } catch (error) {
         return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
     }
+}
 }];
 
 
 exports.accept = async(req,res) =>{
+
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
 
     const id = req.params.id
     var data = [
@@ -123,8 +136,12 @@ exports.accept = async(req,res) =>{
             }
     
 }
+}
 
 exports.reject = async(req,res) =>{
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
 
     const id = req.params.id
     var data = [
@@ -138,7 +155,7 @@ exports.reject = async(req,res) =>{
             if (result.rowsAffected == 1) {
                 res.redirect('/bookingrequest')
             }
-    
+        }
 }
 
 
@@ -209,6 +226,10 @@ exports.bookslot = async(req,res) =>{
 
 
 exports.requests = [async (req, res) => {
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
+
     const name = req.cookies.UserData[0].Name;
     const id = req.cookies.UserData[0].UserID;
     const type = req.cookies.UserData[0].UserType;
@@ -246,11 +267,15 @@ exports.requests = [async (req, res) => {
     } catch (error) {
         return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
     }
+}
 }];
 
 
 
 exports.removeBookingSlot = [async (req, res) => {
+    if(!req.cookies.UserData){
+        res.redirect('/Login')
+    }else{
     try {
         if (!req.body.BookingID) {
             res.json({ status: 0, message: "Please Enter BookingID", data: null, error: null });
@@ -275,4 +300,5 @@ exports.removeBookingSlot = [async (req, res) => {
     } catch (error) {
         return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
     }
+}
 }];
