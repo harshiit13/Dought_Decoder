@@ -1,58 +1,75 @@
 <%- include('../Partial/head.ejs') %>
-    <%- include('../Partial/header.ejs') %>
+<%- include('../Partial/header.ejs') %>
+
         <div class="body-wrapper">
-            <div class="container-fluid">
-
-
-                                
-                <div class="table-responsive rounded-2 mb-4">
-                    <table class="table border text-nowrap customize-table mb-0 align-middle">
-                      <thead class="text-dark fs-4">
-                        <tr>
-                          <th><h6 class="fs-4 fw-semibold mb-0">Name</h6></th>
-                          <th><h6 class="fs-4 fw-semibold mb-0">Mobile No.</h6></th>
-                          <th><h6 class="fs-4 fw-semibold mb-0">Email-id</h6></th>
-                          <th><h6 class="fs-4 fw-semibold mb-0">Subject</h6></th>
-                          <th><h6 class="fs-4 fw-semibold mb-0">Description</h6></th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-
-
-                        <% for( user of data) { %>
-
-                        <tr>
-
-                           
-                          <td><p class="mb-0 fw-normal"><%= user.Name %></p>
-                        </td>
-                          <td>
-                            <p class="mb-0 fw-normal"><%= user.Mobile %></p>
-                          </td>
-                          <td>
-                            <p class="mb-0 fw-normal"><%= user.EmailID %></p>
-                          </td>
-                          <td>
-                            <p class="mb-0 fw-normal"><%= user.Subject %></p>
-                          </td>
-                          <td>
-                            <p class="mb-0 fw-normal"><%= user.Description %></p>
-                          </td>
-
-                        
-                      <% } %>
+          <div class="container-fluid" style="padding-top: 150px !important;">
 
 
 
-
-
-                        </tr>
-                      </tbody>
-                    </table>
+              <div class="card card-body" style="padding-top: 20px !important;">
+          
+            
+                <div class="px-4 py-3 border-bottom">
+                    <h5 class="card-title fw-semibold mb-0">Contact Us</h5>
                   </div>
 
-                
+
+
+<form action="/ContactUs/setContactUs" class="mt-3" method="post" >
+
+
+
+
+    <div class="form-row">
+
+
+
+
+
+        <div class="form-group col-md-4">
+          <label for="inputZip">Mobile Number</label>
+          <input value="<%= data[0].Mobile %>" required name="Mobile" placeholder="Mobile Number" type="text" class="form-control" id="inputZip">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="inputCity">EmailID</label>
+          <input value="<%= data[0].EmailID %>" required placeholder="Email id" name="EmailID" type="email" class="form-control" id="inputCity">
+        </div>
+
+        
+        <div class="form-group col-md-4">
+          <label for="Name">Address</label>
+          <textarea type="text" required   class="form-control" name="Address" id="name" placeholder="Please Add Desciption"><%= data[0].Address %></textarea>
+        </div>
+
+          
+      </div>
+
+
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <button type="submit" class="btn waves-effect waves-light btn-secondary">
+          Save
+        </button>
+
+        <button type="button" onclick="cancle()" class= "ms-3 btn mb-1 waves-effect waves-light btn-rounded btn-danger">
+          Cancle
+        </button>
+      </div>
+    </div>
+
+
+</form>
+
+
+</div>
+
+
+
 </div>
 </div>
 <%- include('../Partial/footer.ejs') %>

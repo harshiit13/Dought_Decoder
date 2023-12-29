@@ -93,10 +93,10 @@ exports.setAboutUs = [async (req, res) => {
                 const result = await dataAccess.execute(`SP_AboutUs`, data);
                 if (result.rowsAffected == 1) {
                     if (!req.body.AboutUsID) {
-                        res.status(200).json({ status: 1, message: "Successfully Inserted.", data: null, error: null });
+                        res.redirect('/home')
                     }
                     else {
-                        res.status(200).json({ status: 1, message: "Successfully Updated.", data: null, error: null });
+                        res.redirect('/home')
                     }
             }
             else{

@@ -1,4 +1,5 @@
 <%- include('../Partial/head.ejs') %>
+<%- include('../Partial/header.ejs') %>
         <div class="body-wrapper">
             <div class="container-fluid">
                 
@@ -7,7 +8,7 @@
           
             
                     <div class="px-4 py-3 border-bottom">
-                        <h5 class="card-title fw-semibold mb-0">Contact Us</h5>
+                        <h5 class="card-title fw-semibold mb-0">Add AboutUs</h5>
                       </div>
     
     
@@ -15,7 +16,8 @@
     <form action="/AboutUs/setAboutUs" method="post" enctype="multipart/form-data" >
     
     
-    
+    <input type="hidden" name="AboutUsID" value="6">
+    <input type="hidden" name="AboutUsImage" value="<%= data[0].AboutUsImage %>" >
     
         <div class="row mt-s">
             
@@ -23,14 +25,14 @@
     
           <div class="form-group col-md-4">
             <label for="inputZip">Title</label>
-            <input required placeholder="Title" name="Title" type="text" class="form-control" id="inputZip">
+            <input required value="<%= data[0].Title %>" placeholder="Title" name="Title" type="text" class="form-control" id="inputZip">
           </div>
     
               
     
               <div class="form-group col-md-4">
                 <label for="Name">Description</label>
-                <textarea type="text" required   class="form-control" name="Description" id="name" placeholder="Please Add Desciption"></textarea>
+                <textarea type="text" required   class="form-control" name="Description" id="name" placeholder="Please Add Desciption"><%= data[0].Description %></textarea>
               </div>
               
     
@@ -72,4 +74,10 @@
 
             </div>
         </div>
+
+        <script>
+          function cancle(){
+            window.location.href = "/addAAboutUs"
+          }
+        </script>
         <%- include('../Partial/footer.ejs') %>

@@ -11,6 +11,42 @@ const Connection = require('../Connection')
 const UserLoginController = require("../Controller/UserLoginController");
 const validation = require("../routes/validation")
 
+router.get('/',async (req,res)=>{
+
+    await Connection.connect();
+    var data1 = [
+        { name: 'Query', value: 'SelectAll' },
+        { name: 'CourseID', value: null },
+        { name: 'IsActive', value: true },
+        { name: 'IsDelete', value: false },
+    ]
+    const result1 = await dataAccess.execute(`SP_Course`, data1);
+    const cdata = result1.recordset
+
+    var data2 = [
+        { name: 'Query', value: 'SelectAll' },
+        { name: 'AboutUsID', value: 6 },
+        { name: 'IsActive', value: true },
+        { name: 'IsDelete', value: false },
+    ]
+    const result = await dataAccess.execute(`SP_AboutUs`, data2);
+    const adata = result.recordset
+
+
+    var data3 = [
+        { name: 'Query', value: 'SelectAll' },
+        { name: 'ContactUsID', value: 6 },
+        { name: 'IsActive', value: true },
+        { name: 'IsDelete', value: false },
+    ]
+    const result3 = await dataAccess.execute(`SP_ContactUs`, data3);
+    const codata = result3.recordset
+
+
+    console.log(codata)
+    res.render('Panel/landing-page',{cdata,adata,codata})
+})
+
 
 router.get('/error',(req,res)=>{
     res.render('Panel/error')
@@ -18,7 +54,8 @@ router.get('/error',(req,res)=>{
 
 router.get('/logout',(req,res)=>{
     res.cookie("UserData", "", { expires: new Date(0) });
-    res.redirect('/Login')
+    console.log(req.cookie);
+    res.redirect('/')
 })
 
 
@@ -82,7 +119,10 @@ router.get('/Profile', validation.validation, async (req,res)=>{
 
 
 router.get('/Login' , (req,res)=>{
-    res.render('Panel/login',{error : 0})
+
+
+             res.render('Panel/login',{error : 0})
+    
 })
 
 
@@ -93,8 +133,23 @@ router.post('/login' , UserLoginController.chkUseLogin)
 const AboutUs = require("../Controller/AboutUs")
 router.post('/AboutUs/setAboutUs' , AboutUs.setAboutUs)
 router.get('/AboutUs/getAboutUs' , AboutUs.getAboutUs)
-router.get('/addAAboutUs',(req,res)=>{
-    res.render('Panel/aboutus-form')
+router.get('/addAAboutUs',async (req,res)=>{
+
+    await Connection.connect();
+    var data1 = [
+        { name: 'Query', value: 'SelectAll' },
+        { name: 'AboutUsID', value: 6 },
+        { name: 'AdminID', value:  null },
+        { name: 'IsActive', value: true },
+        { name: 'IsDelete', value: false },
+    ]
+    const result = await dataAccess.execute(`SP_AboutUs`, data1);
+    const data = result.recordset
+    console.log(data)
+    const name = req.cookies.UserData[0].Name;
+    const id = req.cookies.UserData[0].UserID;
+    const type = req.cookies.UserData[0].UserType;
+    res.render('Panel/aboutus-form',{name,id,type,data})
 })
 router.delete('/AboutUs/removeAboutUs' , AboutUs.removeAboutUs)
 
@@ -146,11 +201,10 @@ router.delete('/BookingSlot/removeBookingSlot' , BookingSlot.removeBookingSlot)
 
 const ContactUs = require("../Controller/ContactUs")
 router.post('/ContactUs/setContactUs' ,ContactUs.setContactUs)
-router.get('/addContactus',ContactUs.addcontactus)
 router.get('/showContactus',ContactUs.viewcontactus)
 router.get('/ContactUs/getContactUs' , ContactUs.getContactUs)
 router.delete('/ContactUs/removeContactUs' , ContactUs.removeContactUs)
-
+router.get('/removecontactus/:id' , ContactUs.removeContactUs)
 
 
 

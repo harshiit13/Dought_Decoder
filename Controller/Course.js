@@ -30,6 +30,7 @@ exports.setCourse = [async (req, res) => {
                 { name: 'CourseID', value: req.body.CourseID ? req.body.CourseID : null },
                 { name: 'DepartmentID', value: req.body.DepartmentID ? req.body.DepartmentID : null },
                 { name: 'CourseName', value: req.body.CourseName ? req.body.CourseName : null },
+                { name: 'Description', value: req.body.Description ? req.body.Description : null },
                 {name : 'IsActive' , value:true},
                 {name:'IsDelete' , value:false}
 

@@ -91,13 +91,22 @@ input[type=password] {
     border-bottom: 2px solid #0DB8DE;
     outline: 0;
     background-color: #1A2226;
-    color: #ECF0F5;
+    color: #f9fafb;
 }
 
 input:focus {
     outline: none;
     box-shadow: 0 0 0;
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    caret-color: #f9fafb;
+    -webkit-text-fill-color: #f9fafb;
+    -webkit-box-shadow: 0 0 0 30px #1A2226 inset !important;
+}
+
 
 label {
     margin-bottom: 0px;
@@ -154,7 +163,6 @@ label {
 
 
 
-
               
     <div class="container" style="margin-bottom: 30px;">
       <div class="row">
@@ -163,10 +171,22 @@ label {
               <div class="col-lg-12 login-key">
                   <i class="fa fa-key" aria-hidden="true"></i>
               </div>
+
               <div class="col-lg-12 login-title">
                   DOUGHT DECODER
               </div>
 
+
+              
+              <% if(error == 1){ %>
+
+                <div class="alert alert-danger" role="alert">
+                  <b> Please Enter Valid Username or Password </b>
+                </div>
+
+                <% } %>
+
+                
               <div class="col-lg-12 login-form">
                   <div class="col-lg-12 login-form">
                     <form method="post" action="/login">

@@ -39,6 +39,11 @@
             <input value="<%= data1[0].CourseName %>" class="form-control" type="text" name="CourseName" id="CourseName" placeholder="Course Name">
           </div>
 
+          <div class="form-group col-md-4">
+            <label for="txt">Edit Description</label>
+            <textarea required class="form-control" name="Description" id="txt" cols="10" rows="3"><%= data1[0].Description %></textarea>
+          </div>
+
         </div>
 
         <button class="btn btn-info mt-3">Submit</button>
