@@ -264,7 +264,7 @@ exports.requests = [async (req, res) => {
             res.render('Panel/booking-request' , {name,id,type,data})
         }
     } catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 }
 }];

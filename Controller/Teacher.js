@@ -127,17 +127,17 @@ exports.setTeacher = [async (req, res) => {
             
                     }
                     catch(error){
-                        return res.status(500).json({ status: 2, message: error.message, data: null, error: null })
+                        res.redirect('/error')
                     }
                 }
             }
             catch(error){
-                return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+                res.redirect('/error')
             }
             
             
             }catch(error){
-                res.send("Some Errror accured in banner upload" + error)
+                res.redirect('/error')
     
                     }        }
 })}]
@@ -370,7 +370,7 @@ exports.getAllTeacher = async (req,res)=>{
       for (d of data){
      d.BirthDate = formatDate(d.BirthDate);
       }
-      console.log(data)
+  
 
     res.render('Panel/teacher-table',{name,id,type,data})
     }
@@ -390,7 +390,6 @@ exports.TeacherMaster = async(req,res) =>  {
     const id = req.cookies.UserData[0].UserID;
     const type = req.cookies.UserData[0].UserType;
 
-    console.log(id)
 
     await Connection.connect();
     var data1 = [
@@ -423,7 +422,7 @@ exports.removeTeacher = [async (req, res) => {
         }
         else {
             await Connection.connect();
-            console.log(req.params)
+
 
           
             var data = [
@@ -433,16 +432,16 @@ exports.removeTeacher = [async (req, res) => {
             ]
             const result = await dataAccess.execute(`SP_Teacher`, data);
             if (result.rowsAffected == 1) {
-                console.log("About to redirect");
+
                 res.redirect('/Teacher');
                 
             }
             else {
-                res.status(200).json({ status: 0, message: "Not Deleted.", data: null, error: null });
+                res.redirect('/error')
             }
         }
     } catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 }
 }

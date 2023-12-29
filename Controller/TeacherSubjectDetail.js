@@ -63,14 +63,14 @@ exports.setTeacherSubjectDetail = [async (req, res) => {
 
         }
         catch(error){
-            return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+            res.redirect('/error')
         }
     
     res.redirect('/showTeacherSubjectDetail')
     }
 }
 catch(error){
-    return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+    res.redirect('/error')
 }
 }
 
@@ -104,14 +104,14 @@ exports.getTeacherSubjectDetail = [async (req, res) => {
                 res.status(200).json({ status: 1, message: "Success.", data: TeacherSubjectDetaildata, error: null });
             }
             else {
-                res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+                res.redirect('/error')
             }
         }
         else {
-            res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+            res.redirect('/error')
         }
     } catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 }
 }
@@ -230,7 +230,6 @@ exports.showDetails = async(req,res) =>{
             if (result.recordset && result.recordset[0]) {
                 const TeacherSubjectDetaildata = result.recordset;
                 if (TeacherSubjectDetaildata.length > 0) {
-                    console.log("abourt to render")
                    res.render('Panel/teacher-subject-show',{name,id,type,data})
                 }
                 else {
@@ -241,7 +240,7 @@ exports.showDetails = async(req,res) =>{
                 res.redirect('/addTeacherSubjectDetail')
             }
         } catch (error) {
-            return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+            res.redirect('/error')
         }
 
 
@@ -273,14 +272,14 @@ exports.BindSubject = async(req,res) =>{
                 res.status(200).json({ status: 1, message: "Success.", data: TeacherSubjectDetaildata, error: null });
             }
             else {
-                res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+                res.redirect('/error')
             }
         }
         else {
-            res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+            res.redirect('/error')
         }
     } catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 
 }
@@ -311,7 +310,7 @@ exports.removeTeacherSubjectDetail = [async (req, res) => {
             }
         }
     catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 }
 }

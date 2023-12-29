@@ -95,7 +95,6 @@ router.get('/Profile', validation.validation, async (req,res)=>{
         ]
     const result = await dataAccess.execute(`SP_Teacher`, data1);
     const data = result.recordset
-        console.log(data)
         res.render('Panel/profile',{name,id,type,data})
     }
 
@@ -110,7 +109,6 @@ router.get('/Profile', validation.validation, async (req,res)=>{
         ]
     const result = await dataAccess.execute(`SP_Admin`, data1);
     const data = result.recordset
-        console.log(data1)
         res.render('Panel/profile',{name,id,type,data})
     }
 }
@@ -145,7 +143,6 @@ router.get('/addAAboutUs',async (req,res)=>{
     ]
     const result = await dataAccess.execute(`SP_AboutUs`, data1);
     const data = result.recordset
-    console.log(data)
     const name = req.cookies.UserData[0].Name;
     const id = req.cookies.UserData[0].UserID;
     const type = req.cookies.UserData[0].UserType;

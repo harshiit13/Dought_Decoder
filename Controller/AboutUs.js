@@ -36,8 +36,7 @@ const imageFilter = function (req, file, cb) {
             return cb(new Error('only .jpg , png , jpeg'), false);
         }
     } else {
-        req.fileValidationError = 'invaild file';
-        return cb(new Error('invaild file'), false);
+        res.redirect('/error')
     }
     cb(null, true)
 }
@@ -105,15 +104,15 @@ exports.setAboutUs = [async (req, res) => {
 
         }
         catch(error){
-            return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+            res.redirect('/error')
         }
     }
 }
 catch(error){
-    return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+    res.redirect('/error')
 }}
 catch(error){
-    return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+    res.redirect('/error')
 }}
 })
 }
@@ -137,14 +136,14 @@ exports.getAboutUs = [async (req, res) => {
                 res.status(200).json({ status: 1, message: "Success.", data: AboutUsdata, error: null });
             }
             else {
-                res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+                res.redirect('/error')
             }
         }
         else {
-            res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+            res.redirect('/error')
         }
     } catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 }];
 
@@ -174,6 +173,6 @@ exports.removeAboutUs = [async (req, res) => {
             }
         }
     } catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 }];

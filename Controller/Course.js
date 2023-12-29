@@ -46,17 +46,17 @@ exports.setCourse = [async (req, res) => {
                         res.redirect('/viewcourse')
                     }
                 } else {
-                    res.status(200).json({ status: 1, message: "Can'r Able to find ID", data: null, error: null });
+                    res.redirect('/error')
                 }
 
             }
             catch (error) {
-                return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+                res.redirect('/error')
             }
         }
     
     catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 }
 }

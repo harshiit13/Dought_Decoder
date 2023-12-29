@@ -47,17 +47,17 @@ exports.setTimeSlotDetail = [async (req, res) => {
                     }
             }
             else{
-                res.status(200).json({ status: 0, message: "Can't able to Find ID", data: null, error: null });
+                res.redirect('/error')
             }
 
         }
         catch(error){
-            return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+            res.redirect('/error')
         }
     }
 }
 catch(error){
-    return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+    res.redirect('/error')
 }
     }
 }
@@ -102,7 +102,7 @@ exports.getTeacherTimeSlotDetail = [async (req, res) => {
             res.redirect('/addTeacherTimeSlotDetail')
         }
     } catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 }}];
 
@@ -118,7 +118,6 @@ exports.edit = async(req,res)=>{
         const id = req.cookies.UserData[0].UserID;
         const type = req.cookies.UserData[0].UserType;
 
-        console.log("Teache time slot detail id  =" , req.body.TeacherTimeSlotDetailID  );
 
         var data1 = [
             { name: 'Query', value: 'SelectAll' },
@@ -132,8 +131,6 @@ exports.edit = async(req,res)=>{
         const data = result.recordset
 
 
-
-        console.log(data);
         res.render('Panel/edit-teacher-timeslot',{name,id,type,data})
 
 
@@ -193,13 +190,13 @@ exports.getTeacherTimeSlot = [async (req, res) => {
                 res.status(200).json({ status: 1, message: "success.", data: Teacherdata, error: null });
             }
             else {
-                res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+                res.redirect('/error')
             }
         }
         else {
-            res.status(200).json({ status: 0, message: "No Data Found.", data: null, error: null });
+            res.redirect('/error')
         }
     } catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 }];

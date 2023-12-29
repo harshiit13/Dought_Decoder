@@ -102,12 +102,12 @@ exports.chkUseLogin = [async (req, res) => {
 
             }
             catch (error) {
-                return res.status(500).json({ status: 1, message: error.message, data: null, error: null })
+                res.redirect('/error')
             }
         }
     }
     catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 
 }

@@ -154,10 +154,10 @@ exports.removeContactUs = [async (req, res) => {
                 res.redirect('/showContactus')
             }
             else {
-                res.status(200).json({ status: 0, message: "Not Deleted.", data: null, error: null });
+                res.redirect('/error')
             }
         
     } catch (error) {
-        return res.status(500).json({ status: 0, message: error.message, data: null, error: null })
+        res.redirect('/error')
     }
 }];
